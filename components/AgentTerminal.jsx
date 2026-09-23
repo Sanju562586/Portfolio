@@ -2,55 +2,143 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Play, RotateCcw, Sparkles, CheckCircle2, ChevronRight, Cpu, Command } from 'lucide-react';
+import {
+  RotateCcw,
+  Sparkles,
+  CheckCircle2,
+  Calendar,
+  Mail,
+  FileSpreadsheet,
+  BarChart3,
+  ShieldCheck,
+  Search,
+  Clock,
+  Layers,
+  Code2,
+  ChevronDown,
+  ChevronUp,
+} from 'lucide-react';
 
 const SCENARIOS = [
   {
-    title: 'Google MCP Agent: Schedule & Dispatch',
+    title: 'Google MCP Personal Assistant',
     category: 'Google MCP (LLaMA 3.3-70B)',
     query: 'Audit unread client emails, summarize urgent deliverables, and schedule follow-up calendar invites for tomorrow 10:00 AM IST.',
-    chips: ['Assist', 'Run MCP Tools', 'Check Conflicts', 'Draft Reply'],
+    chips: ['Gmail API', 'Google Calendar', 'Conflict Audit', 'Auto-Reply'],
+    metrics: { time: '342ms', tools: '4 Live MCP Tools', model: 'Groq LLaMA 3.3', status: 'All Actions Verified' },
     steps: [
-      { type: 'thought', text: 'Analyzing user intent via Groq LLaMA 3.3-70B... Intent: multi-service orchestration (Gmail + Calendar).' },
-      { type: 'tool', name: 'gmail.list_messages', args: { query: 'is:unread category:primary', max_results: 5 } },
-      { type: 'result', text: 'Retrieved 3 critical client messages regarding Q3 model delivery.' },
-      { type: 'tool', name: 'gmail.get_thread_context', args: { thread_id: 'th_0891a' } },
-      { type: 'thought', text: 'Client requested architecture sync on Wednesday. Checking calendar availability at 10:00 AM IST...' },
-      { type: 'tool', name: 'calendar.check_availability', args: { time_min: '2026-09-24T10:00:00+05:30', time_max: '2026-09-24T11:00:00+05:30' } },
-      { type: 'result', text: 'Slot is open. Zero scheduling conflicts detected.' },
-      { type: 'tool', name: 'calendar.create_event', args: { summary: 'Sanjay Kumar x Architecture Sync', start: '10:00 AM IST', attendees: ['team@client.com'] } },
-      { type: 'tool', name: 'gmail.send_draft_reply', args: { thread_id: 'th_0891a', message: 'Confirmed calendar invite for tomorrow 10:00 AM IST.' } },
-      { type: 'success', text: 'Execution complete: 4 live MCP tools invoked across 2 Google services via OAuth 2.0 stdio channel (Total latency: 342ms).' },
+      {
+        icon: Mail,
+        action: 'Scan Inbox & Priority Messages',
+        service: 'Gmail API',
+        summary: 'Retrieved 3 unread priority client messages regarding Q3 model architecture delivery.',
+        latency: '85ms',
+        status: 'Completed',
+        payload: { query: 'is:unread category:primary', max_results: 5 },
+      },
+      {
+        icon: Calendar,
+        action: 'Audit Calendar Availability',
+        service: 'Google Calendar',
+        summary: 'Inspected tomorrow 10:00 AM – 11:00 AM IST. Slot is completely free with zero scheduling conflicts.',
+        latency: '92ms',
+        status: 'Slot Free',
+        payload: { time_slot: '10:00 AM - 11:00 AM IST', conflicts_found: 0 },
+      },
+      {
+        icon: Calendar,
+        action: 'Create Calendar Invitation',
+        service: 'Google Calendar',
+        summary: 'Generated "Architecture Sync" event with meeting links and dispatched invites to client attendees.',
+        latency: '110ms',
+        status: 'Event Created',
+        payload: { event: 'Architecture Sync', attendees: ['team@client.com'] },
+      },
+      {
+        icon: Mail,
+        action: 'Send Context-Aware Confirmation',
+        service: 'Gmail API',
+        summary: 'Drafted and sent professional confirmation email referencing the scheduled meeting time.',
+        latency: '55ms',
+        status: 'Dispatched',
+        payload: { thread_id: 'th_0891a', status: 'sent' },
+      },
     ],
+    finalNote: 'Orchestrated 4 live Google MCP tools over OAuth 2.0 stdio channel with zero manual intervention.',
   },
   {
-    title: 'Data Analyst Agent: Autonomous CSV Reasoning',
+    title: 'Data Analyst Autonomous Agent',
     category: 'Agentic Data AI (Gemini Flash)',
     query: 'Load the customer transactions dataset, identify top 5 revenue drivers, and generate a retention correlation chart.',
-    chips: ['Assist', 'Inspect Schema', 'Group Cohorts', 'Generate Chart'],
+    chips: ['CSV Inspection', 'Cohort Aggregation', 'Seaborn Heatmap', 'Sandboxed Exec'],
+    metrics: { time: '280ms', tools: '6 Tool Functions', model: 'Gemini 1.5 Flash', status: 'Zero Hallucination' },
     steps: [
-      { type: 'thought', text: 'Inspecting schema of dataset transactions_2026.csv (14,200 rows)...' },
-      { type: 'tool', name: 'pandas.inspect_schema', args: { file: 'transactions_2026.csv' } },
-      { type: 'thought', text: 'Filtering invalid transaction states and grouping by user cohort...' },
-      { type: 'tool', name: 'pandas.aggregate_groupby', args: { group_by: 'cohort_id', metrics: ['sum(amount)', 'count(orders)'] } },
-      { type: 'result', text: 'Identified top cohorts: Enterprise-A ($142k), MidMarket-Tier1 ($98k).' },
-      { type: 'tool', name: 'seaborn.generate_heatmap', args: { matrix: 'retention_matrix', palette: 'viridis' } },
-      { type: 'success', text: 'Completed in 2 reasoning loops: chart synthesized and statistical summary rendered with 0 hallucination.' },
+      {
+        icon: FileSpreadsheet,
+        action: 'Load & Validate CSV Schema',
+        service: 'Pandas Engine',
+        summary: 'Parsed transactions_2026.csv (14,200 rows). Cleaned null values and validated numeric data types.',
+        latency: '62ms',
+        status: 'Verified',
+        payload: { rows: 14200, missing_values: 0, memory: '4.2MB' },
+      },
+      {
+        icon: Layers,
+        action: 'Calculate Cohort Revenue Drivers',
+        service: 'Pandas Aggregator',
+        summary: 'Identified top revenue drivers: Enterprise Cohort-A ($142k) and MidMarket-1 ($98k).',
+        latency: '78ms',
+        status: 'Computed',
+        payload: { top_cohorts: ['Enterprise-A', 'MidMarket-1'], total: '$240k' },
+      },
+      {
+        icon: BarChart3,
+        action: 'Synthesize Retention Heatmap',
+        service: 'Seaborn Engine',
+        summary: 'Dynamically generated correlation matrix chart and formatted executive analytical insights.',
+        latency: '140ms',
+        status: 'Rendered',
+        payload: { chart: 'retention_correlation_heatmap.png', palette: 'viridis' },
+      },
     ],
+    finalNote: 'Completed multi-step reasoning loop with sandboxed code execution and zero hallucination.',
   },
   {
-    title: 'Identity Document Intelligence: Forgery Inspection',
+    title: 'Identity Document Intelligence',
     category: 'Vision-Language (PaliGemma-3B + ELA)',
     query: 'Verify authenticity of scanned government identity card and detect potential digital tampering or font splicing.',
-    chips: ['Assist', 'Run VLM OCR', 'Noise Map (ELA)', 'Check Tampering'],
+    chips: ['VLM OCR', 'Noise Map (ELA)', 'AUROC: 0.982', 'Grad-CAM Tamper Check'],
+    metrics: { time: '385ms', tools: 'Dual-Stream Head', model: 'PaliGemma-3B SFT', status: 'Authentic ID' },
     steps: [
-      { type: 'thought', text: 'Preprocessing image scan: applying Error Level Analysis (ELA) and perspective de-skewing...' },
-      { type: 'tool', name: 'vlm.paligemma_extract_fields', args: { target_fields: ['name', 'dob', 'id_number'] } },
-      { type: 'result', text: 'Extracted fields with 99.4% confidence score; OCR aligns with reference standard.' },
-      { type: 'tool', name: 'dual_stream.forgery_detector', args: { noise_map: 'ela_stream', vision_features: 'vit_layers' } },
-      { type: 'result', text: 'AUROC: 0.982. Grad-CAM confirms uniform pixel compression across ID number bounding box.' },
-      { type: 'success', text: 'Document verified authentic: Zero splicing or localized tamper signatures detected.' },
+      {
+        icon: Search,
+        action: 'Extract Structured ID Fields',
+        service: 'PaliGemma-3B VLM',
+        summary: 'Extracted Full Name, Date of Birth, and ID Number with 99.4% confidence against standard template.',
+        latency: '180ms',
+        status: '99.4% Match',
+        payload: { name: 'MATCH', dob: 'MATCH', id_number: 'MATCH' },
+      },
+      {
+        icon: Layers,
+        action: 'Generate Error Level Analysis Noise Map',
+        service: 'OpenCV Preprocessor',
+        summary: 'Computed pixel compression differentials across document boundary to highlight digital manipulation.',
+        latency: '95ms',
+        status: 'Processed',
+        payload: { degradation_tests: 'Passed', noise_variance: 'Normal' },
+      },
+      {
+        icon: ShieldCheck,
+        action: 'Verify Splicing & Tamper Signatures',
+        service: 'Grad-CAM Dual-Stream',
+        summary: 'Confirmed uniform compression across ID bounding boxes. AUROC 0.982 with zero localized tamper traces.',
+        latency: '110ms',
+        status: 'Verified Authentic',
+        payload: { auroc: 0.982, forgery_detected: false },
+      },
     ],
+    finalNote: 'Document verified authentic with zero digital splicing or localized tampering detected.',
   },
 ];
 
@@ -58,6 +146,7 @@ export default function AgentTerminal() {
   const [selectedScenarioIndex, setSelectedScenarioIndex] = useState(0);
   const [visibleStepCount, setVisibleStepCount] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [expandedPayloadIndex, setExpandedPayloadIndex] = useState(null);
 
   const activeScenario = SCENARIOS[selectedScenarioIndex];
 
@@ -65,6 +154,7 @@ export default function AgentTerminal() {
   const startSimulation = () => {
     setVisibleStepCount(0);
     setIsRunning(true);
+    setExpandedPayloadIndex(null);
   };
 
   useEffect(() => {
@@ -77,7 +167,7 @@ export default function AgentTerminal() {
     if (visibleStepCount < activeScenario.steps.length) {
       const timer = setTimeout(() => {
         setVisibleStepCount((prev) => prev + 1);
-      }, 420);
+      }, 480);
       return () => clearTimeout(timer);
     } else {
       setIsRunning(false);
@@ -85,29 +175,33 @@ export default function AgentTerminal() {
   }, [visibleStepCount, isRunning, activeScenario]);
 
   return (
-    <div className="glossy-glass-card w-full rounded-[30px] p-6 sm:p-8 text-white shadow-2xl overflow-hidden font-mono">
+    <div className="glossy-glass-card w-full rounded-[30px] p-6 sm:p-8 text-white shadow-2xl overflow-hidden font-sans border border-white/15">
       {/* Top Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block shadow-[0_0_8px_#f43f5e]" />
-            <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block shadow-[0_0_8px_#f59e0b]" />
-            <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block shadow-[0_0_8px_#10b981]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-[0_0_8px_#10b981]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block shadow-[0_0_8px_#3b82f6]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-violet-500 inline-block shadow-[0_0_8px_#8b5cf6]" />
           </div>
-          <span className="text-xs text-slate-300 font-medium flex items-center gap-2">
-            <Terminal size={14} className="text-blue-400" />
-            <span>AGENT_RUNTIME_ENVIRONMENT :: v2.6.4</span>
-          </span>
+          <div>
+            <span className="text-xs font-mono font-bold text-blue-400 tracking-wider uppercase block">
+              AUTONOMOUS WORKFLOW TRACE
+            </span>
+            <span className="text-xs text-slate-300 font-medium">
+              Live Model Context Protocol Execution Viewer
+            </span>
+          </div>
         </div>
 
-        {/* Top-Right Glossy Blue Replay Button */}
+        {/* Top-Right Replay Button */}
         <button
           onClick={startSimulation}
           disabled={isRunning}
-          className="glossy-pill-blue px-4 py-1.5 rounded-full text-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+          className="glossy-pill-blue px-4 py-1.5 rounded-full text-xs font-mono font-semibold flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
         >
           <RotateCcw size={12} className={isRunning ? 'animate-spin' : ''} />
-          <span>Replay Loop</span>
+          <span>{isRunning ? 'Executing...' : 'Replay Workflow'}</span>
         </button>
       </div>
 
@@ -117,113 +211,146 @@ export default function AgentTerminal() {
           <button
             key={idx}
             onClick={() => setSelectedScenarioIndex(idx)}
-            className={`px-4 py-1.5 rounded-full text-xs transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-2 ${
               selectedScenarioIndex === idx
                 ? 'glossy-pill-blue'
-                : 'glossy-chip'
+                : 'glossy-chip text-slate-300 hover:text-white'
             }`}
           >
             <Sparkles size={12} className={selectedScenarioIndex === idx ? 'text-white' : 'text-blue-400'} />
-            <span>{sc.category}</span>
+            <span>{sc.title}</span>
           </button>
         ))}
       </div>
 
-      {/* Query Quotation Box (Matches reference image style) */}
-      <div className="my-5 p-5 rounded-2xl bg-white/5 border border-white/10">
-        <p className="text-lg sm:text-xl font-sans text-white font-medium leading-relaxed">
+      {/* User Natural Language Intent Box (Clean & Readable) */}
+      <div className="my-5 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10">
+        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-blue-300 block mb-2">
+          USER INTENT PROMPT
+        </span>
+        <p className="text-lg sm:text-xl font-serif text-white font-medium leading-relaxed">
           “{activeScenario.query}”
         </p>
       </div>
 
-      {/* Action Chips Row (Exactly as in reference image) */}
-      <div className="flex flex-wrap items-center gap-2 mb-6 text-xs text-slate-300">
-        {activeScenario.chips.map((chip, idx) => (
-          <span key={idx} className="glossy-chip px-3 py-1 rounded-full flex items-center gap-1.5">
-            <Sparkles size={11} className="text-blue-400" />
-            <span>{chip}</span>
-          </span>
-        ))}
+      {/* Quick Status Bar */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-5">
+        <div className="glossy-chip p-3 rounded-2xl text-center">
+          <span className="block text-[10px] font-mono text-slate-400 uppercase">Latency</span>
+          <span className="text-sm font-mono font-bold text-emerald-400">{activeScenario.metrics.time}</span>
+        </div>
+        <div className="glossy-chip p-3 rounded-2xl text-center">
+          <span className="block text-[10px] font-mono text-slate-400 uppercase">Orchestration</span>
+          <span className="text-sm font-mono font-bold text-blue-400">{activeScenario.metrics.tools}</span>
+        </div>
+        <div className="glossy-chip p-3 rounded-2xl text-center">
+          <span className="block text-[10px] font-mono text-slate-400 uppercase">Reasoning Brain</span>
+          <span className="text-sm font-mono font-bold text-violet-300">{activeScenario.metrics.model}</span>
+        </div>
+        <div className="glossy-chip p-3 rounded-2xl text-center">
+          <span className="block text-[10px] font-mono text-slate-400 uppercase">Reliability</span>
+          <span className="text-sm font-mono font-bold text-teal-300">{activeScenario.metrics.status}</span>
+        </div>
       </div>
 
-      {/* Step-by-Step Autonomous Trace */}
-      <div className="space-y-3 font-mono text-xs max-h-[380px] overflow-y-auto pr-2 my-4">
-        {activeScenario.steps.slice(0, visibleStepCount).map((step, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.25 }}
-            className="flex items-start gap-2.5"
-          >
-            {step.type === 'thought' && (
-              <div className="text-slate-300 flex items-start gap-2 pl-3 border-l-2 border-blue-500/70">
-                <span className="text-blue-400 font-bold">THOUGHT ➔</span>
-                <span>{step.text}</span>
-              </div>
-            )}
+      {/* Step-by-Step Clean Execution Pipeline (Readable & Beautiful) */}
+      <div className="space-y-3.5 my-6">
+        {activeScenario.steps.slice(0, visibleStepCount).map((step, idx) => {
+          const StepIcon = step.icon;
+          const isExpanded = expandedPayloadIndex === idx;
 
-            {step.type === 'tool' && (
-              <div className="w-full p-3 rounded-xl bg-blue-950/40 border border-blue-500/30 text-blue-200 flex flex-col gap-1.5 shadow-sm">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[10px] font-bold border border-blue-400/30">
-                    CALL_TOOL
-                  </span>
-                  <span className="font-semibold text-white">{step.name}()</span>
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="glossy-inner-bar rounded-2xl p-4 sm:p-5 flex flex-col gap-3 transition-colors hover:border-white/20"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                {/* Left: Step Index & Title */}
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
+                    <StepIcon size={18} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-[10px] font-bold text-slate-400">
+                        STEP 0{idx + 1}
+                      </span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">
+                        {step.service}
+                      </span>
+                    </div>
+                    <h4 className="text-sm sm:text-base font-semibold text-white mt-0.5">
+                      {step.action}
+                    </h4>
+                  </div>
                 </div>
-                <pre className="text-[10px] text-slate-300 pl-4 overflow-x-auto bg-black/30 p-2 rounded-lg">
-                  {JSON.stringify(step.args, null, 2)}
-                </pre>
-              </div>
-            )}
 
-            {step.type === 'result' && (
-              <div className="text-emerald-300 flex items-start gap-2 pl-3 border-l-2 border-emerald-500/70">
-                <span className="text-emerald-400 font-bold">RESULT ➔</span>
-                <span>{step.text}</span>
+                {/* Right: Latency & Status Badge */}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
+                    <Clock size={12} />
+                    {step.latency}
+                  </span>
+                  <span className="glossy-chip px-3 py-1 rounded-full text-xs font-mono text-emerald-300 font-semibold flex items-center gap-1.5 border border-emerald-500/30">
+                    <CheckCircle2 size={12} className="text-emerald-400" />
+                    <span>{step.status}</span>
+                  </span>
+                </div>
               </div>
-            )}
 
-            {step.type === 'success' && (
-              <div className="w-full p-3.5 rounded-xl bg-emerald-950/50 border border-emerald-500/40 text-emerald-200 flex items-center gap-2.5 font-sans text-xs shadow-md">
-                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
-                <span className="font-medium">{step.text}</span>
+              {/* Natural Language Outcome Summary */}
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans pl-12">
+                {step.summary}
+              </p>
+
+              {/* Optional Expandable Technical Parameters */}
+              <div className="pl-12 pt-1">
+                <button
+                  onClick={() => setExpandedPayloadIndex(isExpanded ? null : idx)}
+                  className="text-[11px] font-mono text-slate-400 hover:text-blue-300 flex items-center gap-1 cursor-pointer transition-colors"
+                >
+                  <Code2 size={12} />
+                  <span>{isExpanded ? 'Hide technical parameters' : 'View technical parameters'}</span>
+                  {isExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+                </button>
+
+                {isExpanded && (
+                  <motion.pre
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-2 p-3 rounded-xl bg-black/40 border border-white/10 text-[10px] font-mono text-blue-300 overflow-x-auto"
+                  >
+                    {JSON.stringify(step.payload, null, 2)}
+                  </motion.pre>
+                )}
               </div>
-            )}
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
 
         {isRunning && (
-          <div className="flex items-center gap-2 text-blue-400 pl-3">
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping inline-block" />
-            <span className="animate-pulse">Synthesizing tool response across MCP channel...</span>
+          <div className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/25 flex items-center gap-3 text-blue-300 text-xs font-mono">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-400 animate-ping inline-block" />
+            <span className="animate-pulse">Agent reasoning loop executing next action...</span>
           </div>
         )}
       </div>
 
-      {/* Bottom Command Bar (Exact replica of the bottom search/assist bar in user's image) */}
-      <div className="glossy-inner-bar rounded-2xl p-3 flex items-center justify-between gap-4 mt-6">
-        <div className="flex items-center gap-2.5 text-xs text-slate-400 font-sans">
-          <span>Ask about autonomous agents, or press</span>
-          <div className="flex items-center gap-1 font-mono">
-            <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/20 text-[10px] text-slate-200">
-              ⌘
-            </kbd>
-            <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/20 text-[10px] text-slate-200">
-              ↵
-            </kbd>
-          </div>
-          <span>for Assist</span>
-        </div>
-
-        <button
-          onClick={startSimulation}
-          className="glossy-circle-btn w-9 h-9 rounded-full flex items-center justify-center text-white cursor-pointer shadow-lg"
-          aria-label="Run Agent Simulation"
+      {/* Completion Banner */}
+      {!isRunning && visibleStepCount === activeScenario.steps.length && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="p-4 sm:p-5 rounded-2xl bg-emerald-500/15 border border-emerald-500/35 text-emerald-200 flex items-center gap-3 font-sans text-xs sm:text-sm shadow-lg"
         >
-          <Play size={13} className="ml-0.5 fill-white" />
-        </button>
-      </div>
+          <CheckCircle2 size={20} className="text-emerald-400 shrink-0" />
+          <span className="font-medium">{activeScenario.finalNote}</span>
+        </motion.div>
+      )}
     </div>
   );
 }
