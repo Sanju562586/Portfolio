@@ -1,13 +1,105 @@
 export const PROJECTS_DATA = [
-  // --- PROJECT 01: SENTINELLM ---
+  // --- 01: VISION-LANGUAGE MODEL FOR DOCUMENT Q&A ---
   {
     id: '01',
+    tag: 'DEEP LEARNING & VLM',
+    category: 'Deep Learning',
+    title: 'Vision-Language model for document Q&A',
+    subtitle: 'Multimodal Instruction Tuning on DocVQA & Rotated Document Scans',
+    description:
+      'Fine-tuned LLaVA-1.5 multimodal architecture on DocVQA and custom ID card image-QA pairs using LoRA on the LLM backbone with frozen vision encoders, achieving structured field extraction from noisy, rotated, and low-quality document scans.',
+    stack: [
+      'PyTorch',
+      'LLaVA-1.5 / InternVL2',
+      'HuggingFace PEFT',
+      'LoRA',
+      'CLIP/SigLIP',
+      'DocVQA',
+      'bitsandbytes',
+      'Transformers',
+    ],
+    githubUrl: 'https://github.com/Sanju562586/Vision-Language-model-for-document-Q-A',
+    liveUrl: null, // No live deployment available
+    demoType: 'doc-vqa',
+    architecture: 'DocVQA + ID Card Scans ➔ Frozen CLIP/SigLIP Vision Encoder ➔ Cross-Modal Projection MLP ➔ LoRA-adapted LLM Backbone',
+    metrics: ['High ANLS Score', 'Rotated Scan Robustness', '4-bit LoRA Adaptation'],
+    highlights: [
+      'Fine-tuned LLaVA-1.5 on DocVQA + custom ID card image-QA pairs using LoRA on the LLM backbone (frozen vision encoder), achieving structured field extraction from noisy, rotated, and low-quality document scans.',
+      'Built a multimodal inference pipeline with cross-modal projection and chat-format instruction templates; evaluated on ANLS score and hallucination rate across unseen document types.',
+      'Stress-tested on adversarial inputs (blur, rotation, compression artifacts) and documented failure modes with ablation across projector configurations.'
+    ],
+    cardStyle: 'card-1',
+  },
+
+  // --- 02: IDENTITY DOCUMENT INTELLIGENCE SYSTEM ---
+  {
+    id: '02',
+    tag: 'DEEP LEARNING & VLM',
+    category: 'Deep Learning',
+    title: 'Identity Document Intelligence System',
+    subtitle: 'Fine-Tuned PaliGemma-3B with Dual-Stream Forgery Detection & DPO',
+    description:
+      'A multimodal document intelligence platform combining fine-tuned PaliGemma-3B (QLoRA/SFT), dual-stream forgery detection, and DPO alignment across 24 adversarial test conditions.',
+    stack: [
+      'PyTorch',
+      'PaliGemma-3B',
+      'QLoRA',
+      'PEFT',
+      'LoRA',
+      'DPO',
+      'ViT',
+      'OpenCV',
+      'Albumentations',
+      'HuggingFace TRL',
+      'W&B',
+    ],
+    githubUrl: 'https://github.com/Sanju562586/Identity-Document-Intelligence-System',
+    liveUrl: null, // No live deployment available
+    demoType: 'vlm-intel',
+    architecture: 'Synthetic ID Degradation (5k+ docs) ➔ QLoRA SFT on PaliGemma-3B ➔ DPO Preference Alignment ➔ Dual-Stream ELA Forgery Detection',
+    metrics: ['5,000+ Synthetic Docs', '24 Adversarial Conditions', 'Grad-CAM Tamper Maps'],
+    highlights: [
+      'Generated 5,000+ synthetic ID document images across 8 degradation types using PIL & Albumentations, establishing an adversarial OCR benchmark across Tesseract, EasyOCR, and TrOCR.',
+      'Fine-tuned PaliGemma-3B with QLoRA + SFT via HuggingFace TRL for structured field extraction (name, DOB, ID number) from noisy, real-world identity documents.',
+      'Built a dual-stream forgery detection head fusing VLM vision encoder features with ELA noise maps, evaluated on AUROC and ECE with Grad-CAM tamper localization.',
+      'Applied DPO preference alignment atop the SFT checkpoint to penalize overconfident predictions; benchmarked Base → SFT → SFT+DPO across 24 adversarial test conditions on W&B.'
+    ],
+    cardStyle: 'card-2',
+  },
+
+  // --- 03: AGENTIC NATURAL LANGUAGE DATA ANALYSIS ASSISTANT ---
+  {
+    id: '03',
+    tag: 'AGENTIC DATA AI',
+    category: 'AI',
+    title: 'Agentic Natural Language Data Analysis Assistant',
+    subtitle: 'Zero-Framework Multi-Step CSV Reasoning Loop with Sandboxed Execution',
+    description:
+      'An end-to-end AI agent enabling natural language querying over arbitrary CSV datasets via a multi-step autonomous reasoning loop implemented from scratch without orchestration frameworks.',
+    stack: ['Python', 'Gemini API', 'Pandas', 'Streamlit', 'Seaborn'],
+    githubUrl: 'https://github.com/Sanju562586/Data-Analyst-Agent',
+    liveUrl: 'https://data-analysis-assistant.streamlit.app', // Live deployed app
+    demoType: 'data-agent',
+    architecture: 'Natural Language Query ➔ Gemini 1.5 Flash Reasoning Loop ➔ Dynamic Tool Selection ➔ Sandboxed Pandas Execution ➔ Seaborn Chart Synthesis',
+    metrics: ['6 Schema Tools', 'Sandboxed Python Exec', 'Zero-Framework Loop'],
+    highlights: [
+      'Built an end-to-end AI agent enabling natural language querying over arbitrary CSV datasets via a multi-step autonomous reasoning loop — implemented from scratch without any heavy orchestration framework.',
+      'Designed 6 registered tool functions with structured JSON schemas consumed by the Gemini Flash API; results are injected back into the LLM context across iterations until a complete analytical response is formed.',
+      'Tool capabilities include statistical summarisation, conditional row filtering, group-level aggregation, sandboxed Pandas code execution, and dynamic chart generation.',
+      'Deployed as a live Streamlit web application on Streamlit Cloud with API secrets management.'
+    ],
+    cardStyle: 'card-3',
+  },
+
+  // --- 04: SENTINELLM — AI PROMPT INJECTION & SECURITY GATEWAY ---
+  {
+    id: '04',
     tag: 'AI SECURITY & LLM FIREWALL',
     category: 'AI',
     title: 'SentinelLLM — AI Prompt Injection & Security Gateway',
     subtitle: 'Dual-Stage Defense Intercepting Jailbreaks, Prompt Injections & RAG Poisoning',
     description:
-      'An open-source AI security gateway that intercepts LLM requests and responses in real-time to detect and prevent direct/indirect prompt injections, jailbreaks, and instruction hijacking with sub-second overhead.',
+      'An open-source security gateway that intercepts LLM requests and responses in real-time to detect and prevent direct/indirect prompt injection, jailbreaks, and instruction hijacking with sub-second overhead.',
     stack: [
       'Python',
       'FastAPI',
@@ -18,7 +110,7 @@ export const PROJECTS_DATA = [
       'PostgreSQL',
       'SQLAlchemy',
       'Streamlit',
-      'Docker'
+      'Docker',
     ],
     githubUrl: 'https://github.com/Sanju562586/Prompt-Injection-Firewall',
     liveUrl: null, // No live deployment available
@@ -30,12 +122,61 @@ export const PROJECTS_DATA = [
       'Implemented a dual-stage security pipeline combining fast heuristic rule-based detection with DeBERTa-based deep classification, including dedicated RAG poisoning and tool-output injection detection.',
       'Developed a 50+ case red-team adversarial benchmark, PostgreSQL audit trail system, Streamlit security dashboard, and Dockerized FastAPI gateway enabling continuous regression testing.'
     ],
+    cardStyle: 'card-4',
+  },
+
+  // --- 05: INTELLIGENT FRAUD DETECTION AND RISK SCORING SYSTEM ---
+  {
+    id: '05',
+    tag: 'DISTRIBUTED ML & STREAMING',
+    category: 'Machine Learning',
+    title: 'Intelligent Fraud Detection and Risk Scoring System',
+    subtitle: 'Scalable Streaming Architecture with Apache Kafka, Spark & 7-State Lifecycle',
+    description:
+      'A scalable real-time data processing pipeline using Apache Kafka and Spark Structured Streaming with a partition-based load balancer, 3 parallel workers, and a 7-state transaction lifecycle.',
+    stack: ['Apache Spark', 'Kafka', 'Hadoop', 'Python', 'Scikit-learn', 'FastAPI'],
+    githubUrl: 'https://github.com/Sanju562586/Intelligent-Fraud-Detection',
+    liveUrl: null, // No live deployment available
+    demoType: 'stream-fraud',
+    architecture: 'Kafka Stream Ingestion ➔ Partition Load Balancer ➔ 3 Spark Workers ➔ Random Forest Scoring ➔ 7-State Lifecycle (RECEIVED → QUEUED → PROCESSING → SCORED → FLAGGED/CLEARED → PUBLISHED) ➔ FastAPI REST API',
+    metrics: ['7-State Lifecycle', '3 Parallel Workers', 'Kafka Checkpointing'],
+    highlights: [
+      'Designed and implemented a scalable real-time data processing pipeline using Apache Kafka and Spark Structured Streaming to ingest, process, clean, and transform streaming transaction data.',
+      'Built a distributed processing architecture with a partition-based load balancer and 3 parallel workers, enabling horizontal scalability and efficient processing of high-volume transactions.',
+      'Developed a Random Forest-based fraud detection and risk scoring solution with feature preprocessing and real-time inference for automated transaction analysis.',
+      'Designed a distributed 7-state transaction lifecycle architecture covering RECEIVED → QUEUED → PROCESSING → SCORED → FLAGGED/CLEARED → PUBLISHED, ensuring state validation, timestamps, and end-to-end traceability.',
+      'Developed a FastAPI backend exposing REST APIs for transaction monitoring, fraud predictions, worker health, and system metrics.',
+      'Improved pipeline reliability and fault tolerance through Kafka offset checkpointing and independently operating worker architecture.'
+    ],
     cardStyle: 'card-1',
   },
 
-  // --- PROJECT 02: GOOGLE MCP AGENT ---
+  // --- 06: AI RESUME Q&A ASSISTANT ---
   {
-    id: '02',
+    id: '06',
+    tag: 'RETRIEVAL AUGMENTATION',
+    category: 'AI',
+    title: 'AI Resume Q&A Assistant',
+    subtitle: 'Modular FAISS Vector Search & LLM Interview Synthesis Engine',
+    description:
+      'A Retrieval-Augmented Generation (RAG) pipeline covering document parsing, chunking, embedding generation, and semantic vector search over a FAISS index with pluggable LLM backends.',
+    stack: ['Python', 'LangChain', 'RAG', 'FAISS', 'LLMs'],
+    githubUrl: 'https://github.com/Sanju562586/AI-Resume-Q-A-Assistant',
+    liveUrl: null, // No live deployment available
+    demoType: 'rag-engine',
+    architecture: 'Document Parser (PDF/DOCX) ➔ Recursive Text Chunking ➔ Embedding Generation ➔ FAISS Similarity Index ➔ Grounded LLM Response Generator',
+    metrics: ['<40ms Vector Search', 'Zero Downstream Coupling', 'Multi-Format Parser'],
+    highlights: [
+      'Built a Retrieval-Augmented Generation (RAG) pipeline covering document parsing, chunking, embedding generation, and semantic search over a FAISS vector index.',
+      'Integrated LLMs to answer natural-language queries against resume content, enabling context-aware responses, skill extraction, and automated interview question generation.',
+      'Designed a modular pipeline architecture allowing the embedding model or LLM backend to be swapped with zero downstream changes.'
+    ],
+    cardStyle: 'card-2',
+  },
+
+  // --- 07: GOOGLE AI PERSONAL ASSISTANT ---
+  {
+    id: '07',
     tag: 'GOOGLE MCP & AGENTIC AI',
     category: 'AI',
     title: 'Google AI Personal Assistant',
@@ -54,130 +195,10 @@ export const PROJECTS_DATA = [
       'Live Google Integration: Full read/write access to Google services via OAuth 2.0; send emails, create calendar events, search Drive files in real time.',
       'Multi-turn Conversation: Maintains rolling chat history (up to 20 turns), auto-injects current IST time for scheduling, and handles malformed tool calls with regex fallback parsing.'
     ],
-    cardStyle: 'card-2',
-  },
-
-  // --- PROJECT 03: AGENTIC DATA ANALYSIS ASSISTANT ---
-  {
-    id: '03',
-    tag: 'AGENTIC DATA AI',
-    category: 'AI',
-    title: 'Agentic Natural Language Data Analysis Assistant',
-    subtitle: 'Zero-Framework Multi-Step CSV Reasoning Loop with Sandboxed Execution',
-    description:
-      'An end-to-end AI agent enabling natural language querying over arbitrary CSV datasets via a multi-step autonomous reasoning loop implemented from scratch without orchestration frameworks.',
-    stack: ['Python', 'Gemini API', 'Pandas', 'Streamlit', 'Seaborn'],
-    githubUrl: 'https://github.com/Sanju562586/Data-Analyst-Agent',
-    liveUrl: 'https://data-analysis-assistant.streamlit.app', // Streamlit Cloud live link
-    demoType: 'data-agent',
-    architecture: 'Natural Language Query ➔ Gemini 1.5 Flash Reasoning Loop ➔ Dynamic Tool Selection ➔ Sandboxed Pandas Execution ➔ Seaborn Chart Synthesis',
-    metrics: ['6 Schema Tools', 'Sandboxed Python Exec', 'Zero-Framework Loop'],
-    highlights: [
-      'Built an end-to-end AI agent enabling natural language querying over arbitrary CSV datasets via a multi-step autonomous reasoning loop — implemented from scratch without any heavy orchestration framework.',
-      'Designed 6 registered tool functions with structured JSON schemas consumed by the Gemini Flash API; results are injected back into the LLM context across iterations until a complete analytical response is formed.',
-      'Tool capabilities include statistical summarisation, conditional row filtering, group-level aggregation, sandboxed Pandas code execution, and dynamic chart generation.',
-      'Deployed as a live Streamlit web application on Streamlit Cloud with secure API secrets management.'
-    ],
     cardStyle: 'card-3',
   },
 
-  // --- PROJECT 04: IDENTITY DOCUMENT INTELLIGENCE ---
-  {
-    id: '04',
-    tag: 'DEEP LEARNING & VLM',
-    category: 'Deep Learning',
-    title: 'Identity Document Intelligence System',
-    subtitle: 'Fine-Tuned PaliGemma-3B with Dual-Stream Forgery Detection & DPO',
-    description:
-      'A multimodal document intelligence platform combining fine-tuned PaliGemma-3B (QLoRA/SFT), dual-stream forgery detection, and DPO alignment across 24 adversarial test conditions.',
-    stack: ['PyTorch', 'PaliGemma-3B', 'QLoRA', 'PEFT', 'LoRA', 'DPO', 'ViT', 'OpenCV', 'Albumentations', 'HuggingFace TRL', 'W&B'],
-    githubUrl: 'https://github.com/Sanju562586/Identity-Document-Intelligence-System',
-    liveUrl: null, // High-memory GPU model
-    demoType: 'vlm-intel',
-    architecture: 'Synthetic ID Degradation (5k+ docs) ➔ QLoRA SFT on PaliGemma-3B ➔ DPO Preference Alignment ➔ Dual-Stream ELA Forgery Detection',
-    metrics: ['5,000+ Synthetic Docs', '24 Adversarial Conditions', 'Grad-CAM Tamper Maps'],
-    highlights: [
-      'Generated 5,000+ synthetic ID document images across 8 degradation types using PIL & Albumentations, establishing an adversarial OCR benchmark across Tesseract, EasyOCR, and TrOCR.',
-      'Fine-tuned PaliGemma-3B with QLoRA + SFT via HuggingFace TRL for structured field extraction (name, DOB, ID number) from noisy, real-world identity documents.',
-      'Built a dual-stream forgery detection head fusing VLM vision encoder features with ELA noise maps, evaluated on AUROC and ECE with Grad-CAM tamper localization.',
-      'Applied DPO preference alignment atop the SFT checkpoint to penalize overconfident predictions; benchmarked Base → SFT → SFT+DPO across 24 adversarial test conditions on W&B.'
-    ],
-    cardStyle: 'card-4',
-  },
-
-  // --- PROJECT 05: VISION-LANGUAGE MODEL FOR DOC Q&A ---
-  {
-    id: '05',
-    tag: 'DEEP LEARNING & VLM',
-    category: 'Deep Learning',
-    title: 'Vision-Language Model for Document Q&A',
-    subtitle: 'Multimodal Instruction Tuning on DocVQA & Rotated Document Scans',
-    description:
-      'Fine-tuned LLaVA-1.5 multimodal architecture on DocVQA and custom ID card image-QA pairs using LoRA on the LLM backbone with frozen vision encoders for low-quality document scans.',
-    stack: ['PyTorch', 'LLaVA-1.5 / InternVL2', 'HuggingFace PEFT', 'LoRA', 'CLIP/SigLIP', 'DocVQA', 'bitsandbytes', 'Transformers'],
-    githubUrl: 'https://github.com/Sanju562586/Vision-Language-model-for-document-Q-A',
-    liveUrl: null, // GPU inference checkpoint
-    demoType: 'doc-vqa',
-    architecture: 'DocVQA + ID Scans ➔ Frozen CLIP/SigLIP ViT ➔ Cross-Modal Projection MLP ➔ LoRA-adapted LLM Backbone',
-    metrics: ['High ANLS Score', 'Rotated Scan Robustness', '4-bit LoRA Adaptation'],
-    highlights: [
-      'Fine-tuned LLaVA-1.5 on DocVQA + custom ID card image-QA pairs using LoRA on the LLM backbone (frozen vision encoder), achieving structured field extraction from noisy, rotated, and low-quality document scans.',
-      'Built a multimodal inference pipeline with cross-modal projection and chat-format instruction templates; evaluated on ANLS score and hallucination rate across unseen document types.',
-      'Stress-tested on adversarial inputs (blur, rotation, compression artifacts) and documented failure modes with ablation across projector configurations.'
-    ],
-    cardStyle: 'card-1',
-  },
-
-  // --- PROJECT 06: INTELLIGENT FRAUD DETECTION ---
-  {
-    id: '06',
-    tag: 'DISTRIBUTED ML & STREAMING',
-    category: 'Machine Learning',
-    title: 'Intelligent Fraud Detection and Risk Scoring System',
-    subtitle: 'Scalable Streaming Architecture with Apache Kafka, Spark & 7-State Lifecycle',
-    description:
-      'A distributed stream processing platform using Apache Kafka and Spark Structured Streaming with a partition-based load balancer, 3 parallel workers, and a 7-state transaction lifecycle.',
-    stack: ['Apache Spark', 'Kafka', 'Hadoop', 'Python', 'Scikit-learn', 'FastAPI'],
-    githubUrl: 'https://github.com/Sanju562586/Intelligent-Fraud-Detection',
-    liveUrl: null, // Distributed cluster setup
-    demoType: 'stream-fraud',
-    architecture: 'Kafka Stream Ingestion ➔ Partition Load Balancer ➔ 3 Spark Workers ➔ Random Forest Scoring ➔ 7-State Lifecycle (RECEIVED → QUEUED → PROCESSING → SCORED → FLAGGED/CLEARED → PUBLISHED) ➔ FastAPI REST API',
-    metrics: ['7-State Lifecycle', '3 Parallel Workers', 'Kafka Checkpointing'],
-    highlights: [
-      'Designed and implemented a scalable real-time data processing pipeline using Apache Kafka and Spark Structured Streaming to ingest, process, clean, and transform streaming transaction data.',
-      'Built a distributed processing architecture with a partition-based load balancer and 3 parallel workers, enabling horizontal scalability and efficient processing of high-volume transactions.',
-      'Developed a Random Forest-based fraud detection and risk scoring solution with feature preprocessing and real-time inference for automated transaction analysis.',
-      'Designed a distributed 7-state transaction lifecycle architecture covering RECEIVED → QUEUED → PROCESSING → SCORED → FLAGGED/CLEARED → PUBLISHED, ensuring state validation, timestamps, and end-to-end traceability.',
-      'Developed a FastAPI backend exposing REST APIs for transaction monitoring, fraud predictions, worker health, and system metrics.',
-      'Improved pipeline reliability and fault tolerance through Kafka offset checkpointing and independently operating worker architecture.'
-    ],
-    cardStyle: 'card-2',
-  },
-
-  // --- PROJECT 07: AI RESUME Q&A ASSISTANT ---
-  {
-    id: '07',
-    tag: 'RETRIEVAL AUGMENTATION',
-    category: 'AI',
-    title: 'AI Resume Q&A Assistant',
-    subtitle: 'Modular FAISS Vector Search & LLM Interview Synthesis Engine',
-    description:
-      'A Retrieval-Augmented Generation (RAG) pipeline covering document parsing, chunking, embedding generation, and semantic vector search over a FAISS index with pluggable LLM backends.',
-    stack: ['Python', 'LangChain', 'RAG', 'FAISS', 'LLMs'],
-    githubUrl: 'https://github.com/Sanju562586/AI-Resume-Q-A-Assistant',
-    liveUrl: null, // Local RAG engine
-    demoType: 'rag-engine',
-    architecture: 'Document Parser (PDF/DOCX) ➔ Recursive Text Chunking ➔ Embedding Generation ➔ FAISS Similarity Index ➔ Grounded LLM Response Generator',
-    metrics: ['<40ms Vector Search', 'Zero Downstream Coupling', 'Multi-Format Parser'],
-    highlights: [
-      'Built a Retrieval-Augmented Generation (RAG) pipeline covering document parsing, chunking, embedding generation, and semantic search over a FAISS vector index.',
-      'Integrated LLMs to answer natural-language queries against resume content, enabling context-aware responses, skill extraction, and automated interview question generation.',
-      'Designed a modular pipeline architecture allowing the embedding model or LLM backend to be swapped with zero downstream changes.'
-    ],
-    cardStyle: 'card-3',
-  },
-
-  // --- PROJECT 08: CAMPUS FOOD REDISTRIBUTION ---
+  // --- 08: CAMPUS FOOD REDISTRIBUTION NETWORK ---
   {
     id: '08',
     tag: 'FULL-STACK WEB & REALTIME',

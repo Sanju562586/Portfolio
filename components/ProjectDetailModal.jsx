@@ -23,10 +23,16 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
     };
     if (project) {
       document.body.style.overflow = 'hidden';
+      if (typeof window !== 'undefined' && window.__lenis) {
+        window.__lenis.stop();
+      }
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => {
       document.body.style.overflow = '';
+      if (typeof window !== 'undefined' && window.__lenis) {
+        window.__lenis.start();
+      }
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [project, onClose]);
@@ -44,23 +50,28 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div
+        data-lenis-prevent
+        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/75 backdrop-blur-2xl"
+          className="fixed inset-0 bg-black/80 backdrop-blur-2xl"
         />
 
-        {/* Modal Window (Glossy Glass) */}
+        {/* Modal Window (Glossy Glass with Native Smooth Scroll) */}
         <motion.div
+          data-lenis-prevent
+          tabIndex={0}
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="glossy-glass-card relative z-10 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-[32px] p-7 sm:p-10 my-auto text-white"
+          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          className="glossy-glass-card modal-custom-scroll relative z-10 w-full max-w-3xl max-h-[88vh] overflow-y-auto overscroll-contain rounded-[32px] p-6 sm:p-10 my-auto text-white shadow-2xl focus:outline-none"
         >
           {/* Close Button */}
           <button

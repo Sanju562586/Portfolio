@@ -17,6 +17,7 @@ export default function SmoothScroll({ children }) {
       wheelMultiplier: 1.1,
       touchMultiplier: 1.8,
       infinite: false,
+      prevent: (node) => node.hasAttribute?.('data-lenis-prevent') || !!node.closest?.('[data-lenis-prevent]'),
     });
 
     let animationFrameId;

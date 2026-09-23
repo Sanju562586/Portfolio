@@ -8,7 +8,6 @@ import {
   Sparkles,
   Play,
   Terminal,
-  Globe,
   Radio,
 } from 'lucide-react';
 
@@ -122,7 +121,7 @@ export default function ProjectCard3D({
           </span>
         </div>
 
-        {/* Live Demo or Architecture Button */}
+        {/* Live Demo or Details Button */}
         <div className="flex items-center gap-2">
           {/* Live Demo Button with Deployment Detection */}
           <button
@@ -149,21 +148,25 @@ export default function ProjectCard3D({
         </div>
       </motion.div>
 
-      {/* Main Quote / Statement Title (Z-Depth: 35px) */}
+      {/* Main Original Project Title (Z-Depth: 35px) */}
       <motion.div
         style={{ transform: 'translateZ(35px)' }}
         className="relative z-20 my-4"
       >
-        <h3 className="text-xl sm:text-2xl font-sans font-semibold text-white tracking-tight leading-snug group-hover:text-blue-200 transition-colors">
-          “{project.description}”
+        <h3 className="text-2xl sm:text-[26px] font-serif font-bold text-white tracking-tight leading-snug group-hover:text-blue-300 transition-colors">
+          {project.title}
         </h3>
 
         {project.subtitle && (
-          <p className="font-mono text-xs text-blue-400/90 mt-3 font-medium flex items-center gap-1.5">
+          <p className="font-mono text-xs text-blue-400/90 mt-2 font-medium flex items-center gap-1.5">
             <Terminal size={13} className="text-blue-400 shrink-0" />
             <span>{project.subtitle}</span>
           </p>
         )}
+
+        <p className="mt-3 text-slate-300 text-xs sm:text-sm font-sans leading-relaxed line-clamp-3">
+          {project.description}
+        </p>
       </motion.div>
 
       {/* Feature Action Chips Row */}
@@ -173,7 +176,7 @@ export default function ProjectCard3D({
       >
         <span className="glossy-chip px-3 py-1 rounded-full flex items-center gap-1">
           <Sparkles size={11} className="text-blue-400" />
-          <span>Autonomous Loop</span>
+          <span>Verified System</span>
         </span>
 
         {project.metrics && project.metrics.slice(0, 2).map((m, i) => (
@@ -182,11 +185,6 @@ export default function ProjectCard3D({
             <span>{m}</span>
           </span>
         ))}
-
-        <span className="glossy-chip px-3 py-1 rounded-full flex items-center gap-1">
-          <span className="text-slate-400">·</span>
-          <span>Zero Hallucination</span>
-        </span>
       </motion.div>
 
       {/* Bottom Glossy Inner Bar */}

@@ -28,12 +28,129 @@
         <p class="meta reveal">08 PROJECTS<br>01—08 / ARCHIVE</p>
       </section>
       <section class="work-grid">
+        <!-- 01: Vision-Language model for document Q&A -->
         <article class="work-card card-1 reveal">
           <div class="card-art"></div>
           <span class="work-number">01 / 08</span>
           <div class="work-body">
+            <span class="tag">DEEP LEARNING &amp; VLM</span>
+            <h2>Vision-Language model for document Q&A</h2>
+            <p>Fine-tuned LLaVA-1.5 on DocVQA + custom ID card image-QA pairs using LoRA on the LLM backbone (frozen vision encoder), achieving structured field extraction from noisy, rotated, and low-quality document scans.</p>
+            <div class="stack">
+              <span>PyTorch</span>
+              <span>LLaVA-1.5</span>
+              <span>PEFT</span>
+              <span>LoRA</span>
+              <span>CLIP/SigLIP</span>
+              <span>DocVQA</span>
+            </div>
+            <a href="https://github.com/Sanju562586/Vision-Language-model-for-document-Q-A" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
+          </div>
+        </article>
+
+        <!-- 02: Identity Document Intelligence System -->
+        <article class="work-card card-2 reveal">
+          <div class="card-art"></div>
+          <span class="work-number">02 / 08</span>
+          <div class="work-body">
+            <span class="tag">DEEP LEARNING &amp; VLM</span>
+            <h2>Identity Document Intelligence System</h2>
+            <p>Fine-tuned PaliGemma-3B with QLoRA/SFT and dual-stream forgery detection fusing vision encoder features with ELA noise maps, aligned with DPO across 24 adversarial conditions.</p>
+            <div class="stack">
+              <span>PyTorch</span>
+              <span>PaliGemma-3B</span>
+              <span>QLoRA</span>
+              <span>DPO</span>
+              <span>OpenCV</span>
+              <span>HuggingFace TRL</span>
+            </div>
+            <a href="https://github.com/Sanju562586/Identity-Document-Intelligence-System" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
+          </div>
+        </article>
+
+        <!-- 03: Agentic Natural Language Data Analysis Assistant -->
+        <article class="work-card card-3 reveal">
+          <div class="card-art"></div>
+          <span class="work-number">03 / 08</span>
+          <div class="work-body">
+            <span class="tag">AGENTIC DATA AI</span>
+            <h2>Agentic Natural Language Data Analysis Assistant</h2>
+            <p>End-to-end AI agent enabling natural language querying over arbitrary CSV datasets via a multi-step autonomous reasoning loop with sandboxed Pandas code execution.</p>
+            <div class="stack">
+              <span>Python</span>
+              <span>Gemini API</span>
+              <span>Pandas</span>
+              <span>Streamlit</span>
+              <span>Seaborn</span>
+            </div>
+            <a href="https://github.com/Sanju562586/Data-Analyst-Agent" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
+          </div>
+        </article>
+
+        <!-- 04: SentinelLLM — AI Prompt Injection & Security Gateway -->
+        <article class="work-card card-4 reveal">
+          <div class="card-art"></div>
+          <span class="work-number">04 / 08</span>
+          <div class="work-body">
+            <span class="tag">AI SECURITY &amp; LLM FIREWALL</span>
+            <h2>SentinelLLM — AI Prompt Injection &amp; Security Gateway</h2>
+            <p>Open-source security gateway intercepting LLM requests in real time to prevent prompt injection, jailbreaks, and RAG poisoning using rule-based scanners and DeBERTa deep classifiers.</p>
+            <div class="stack">
+              <span>FastAPI</span>
+              <span>PyTorch</span>
+              <span>DeBERTa</span>
+              <span>Presidio</span>
+              <span>Docker</span>
+            </div>
+            <a href="https://github.com/Sanju562586/Prompt-Injection-Firewall" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
+          </div>
+        </article>
+
+        <!-- 05: Intelligent Fraud Detection and Risk Scoring System -->
+        <article class="work-card card-1 reveal">
+          <div class="card-art"></div>
+          <span class="work-number">05 / 08</span>
+          <div class="work-body">
+            <span class="tag">DISTRIBUTED ML &amp; STREAMING</span>
+            <h2>Intelligent Fraud Detection and Risk Scoring System</h2>
+            <p>Scalable real-time data processing pipeline using Kafka and Spark Structured Streaming with a partition load balancer, 3 parallel workers, and a 7-state transaction lifecycle.</p>
+            <div class="stack">
+              <span>Spark</span>
+              <span>Kafka</span>
+              <span>FastAPI</span>
+              <span>Scikit-learn</span>
+              <span>Python</span>
+            </div>
+            <a href="https://github.com/Sanju562586/Intelligent-Fraud-Detection" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
+          </div>
+        </article>
+
+        <!-- 06: AI Resume Q&A Assistant -->
+        <article class="work-card card-2 reveal">
+          <div class="card-art"></div>
+          <span class="work-number">06 / 08</span>
+          <div class="work-body">
+            <span class="tag">RETRIEVAL AUGMENTATION</span>
+            <h2>AI Resume Q&A Assistant</h2>
+            <p>RAG pipeline covering document parsing, chunking, embedding generation, and semantic search over a FAISS vector index with pluggable LLM backends.</p>
+            <div class="stack">
+              <span>Python</span>
+              <span>LangChain</span>
+              <span>RAG</span>
+              <span>FAISS</span>
+              <span>LLMs</span>
+            </div>
+            <a href="https://github.com/Sanju562586/AI-Resume-Q-A-Assistant" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
+          </div>
+        </article>
+
+        <!-- 07: Google AI Personal Assistant -->
+        <article class="work-card card-3 reveal">
+          <div class="card-art"></div>
+          <span class="work-number">07 / 08</span>
+          <div class="work-body">
             <span class="tag">GOOGLE MCP &amp; AGENTIC AI</span>
-            <h2>Google AI<br>Personal Assistant.</h2>
+            <h2>Google AI Personal Assistant</h2>
             <p>Autonomous agent combining Groq LLaMA 3.3-70B and Model Context Protocol to execute 20+ live tools across Google services over OAuth 2.0.</p>
             <div class="stack">
               <span>Python</span>
@@ -41,14 +158,17 @@
               <span>MCP Protocol</span>
               <span>OAuth 2.0</span>
             </div>
+            <a href="https://github.com/Sanju562586/GoogleServicesAgent" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
           </div>
         </article>
-        <article class="work-card card-2 reveal">
+
+        <!-- 08: Campus Food Redistribution Network -->
+        <article class="work-card card-4 reveal">
           <div class="card-art"></div>
-          <span class="work-number">02 / 08</span>
+          <span class="work-number">08 / 08</span>
           <div class="work-body">
             <span class="tag">REALTIME DISTRIBUTED SYSTEMS</span>
-            <h2>Campus Food<br>Redistribution Network.</h2>
+            <h2>Campus Food Redistribution Network</h2>
             <p>Real-time distributed web platform with zero-race-condition PostgreSQL row-locking transactions, WebSockets, and Gemini AI dietary recommendations.</p>
             <div class="stack">
               <span>Next.js</span>
@@ -57,6 +177,7 @@
               <span>Socket.io</span>
               <span>Gemini AI</span>
             </div>
+            <a href="https://github.com/Sanju562586/CampusFoodRedistribution" target="_blank" rel="noopener" class="repo-link">GitHub Repo ↗</a>
           </div>
         </article>
       </section>

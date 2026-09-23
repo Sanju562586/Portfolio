@@ -21,7 +21,7 @@ import {
 
 const SCENARIOS = [
   {
-    title: 'Google MCP Personal Assistant',
+    title: 'Google AI Personal Assistant',
     category: 'Google MCP (LLaMA 3.3-70B)',
     query: 'Audit unread client emails, summarize urgent deliverables, and schedule follow-up calendar invites for tomorrow 10:00 AM IST.',
     chips: ['Gmail API', 'Google Calendar', 'Conflict Audit', 'Auto-Reply'],
@@ -67,7 +67,7 @@ const SCENARIOS = [
     finalNote: 'Orchestrated 4 live Google MCP tools over OAuth 2.0 stdio channel with zero manual intervention.',
   },
   {
-    title: 'Data Analyst Autonomous Agent',
+    title: 'Agentic Natural Language Data Analysis Assistant',
     category: 'Agentic Data AI (Gemini Flash)',
     query: 'Load the customer transactions dataset, identify top 5 revenue drivers, and generate a retention correlation chart.',
     chips: ['CSV Inspection', 'Cohort Aggregation', 'Seaborn Heatmap', 'Sandboxed Exec'],
@@ -104,7 +104,7 @@ const SCENARIOS = [
     finalNote: 'Completed multi-step reasoning loop with sandboxed code execution and zero hallucination.',
   },
   {
-    title: 'Identity Document Intelligence',
+    title: 'Identity Document Intelligence System',
     category: 'Vision-Language (PaliGemma-3B + ELA)',
     query: 'Verify authenticity of scanned government identity card and detect potential digital tampering or font splicing.',
     chips: ['VLM OCR', 'Noise Map (ELA)', 'AUROC: 0.982', 'Grad-CAM Tamper Check'],
