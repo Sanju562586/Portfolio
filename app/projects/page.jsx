@@ -6,12 +6,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Sparkles, ArrowLeft, Filter, X } from 'lucide-react';
 import ProjectCard3D from '../../components/ProjectCard3D';
 import ProjectDetailModal from '../../components/ProjectDetailModal';
+import DeploymentNoticeModal from '../../components/DeploymentNoticeModal';
 import { PROJECTS_DATA } from '../../data/projectsData';
 
 export default function ProjectsArchivePage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [noticeProject, setNoticeProject] = useState(null);
 
   const categories = ['All', 'AI', 'Deep Learning', 'Machine Learning', 'Web Development'];
 
@@ -129,6 +131,7 @@ export default function ProjectsArchivePage() {
                 key={project.id}
                 project={project}
                 onOpenDetails={(p) => setSelectedProject(p)}
+                onNoDeployment={(p) => setNoticeProject(p)}
                 delay={idx * 0.08}
               />
             ))}
@@ -156,6 +159,14 @@ export default function ProjectsArchivePage() {
       <ProjectDetailModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
+        onNoDeployment={(p) => setNoticeProject(p)}
+      />
+
+      {/* Deployment Notice Modal Alert */}
+      <DeploymentNoticeModal
+        project={noticeProject}
+        isOpen={!!noticeProject}
+        onClose={() => setNoticeProject(null)}
       />
     </div>
   );

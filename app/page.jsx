@@ -24,6 +24,7 @@ import Hero3DVisualizer from '../components/Hero3DVisualizer';
 import AgentTerminal from '../components/AgentTerminal';
 import ProjectCard3D from '../components/ProjectCard3D';
 import ProjectDetailModal from '../components/ProjectDetailModal';
+import DeploymentNoticeModal from '../components/DeploymentNoticeModal';
 import Skills3DSphere from '../components/Skills3DSphere';
 import StatCard3D from '../components/StatCard3D';
 import Magnetic3DButton from '../components/Magnetic3DButton';
@@ -32,6 +33,7 @@ import { PROJECTS_DATA } from '../data/projectsData';
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [noticeProject, setNoticeProject] = useState(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   // Scroll Progress Bar with spring physics
@@ -275,12 +277,13 @@ export default function HomePage() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.slice(0, 4).map((project, idx) => (
+              {filteredProjects.slice(0, 6).map((project, idx) => (
                 <ProjectCard3D
                   key={project.id}
                   project={project}
                   onOpenDetails={(p) => setSelectedProject(p)}
-                  delay={idx * 0.15}
+                  onNoDeployment={(p) => setNoticeProject(p)}
+                  delay={idx * 0.1}
                 />
               ))}
             </AnimatePresence>
@@ -382,10 +385,10 @@ export default function HomePage() {
             <div className="glossy-glass-card p-8 rounded-3xl">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-mono font-bold text-blue-300 glossy-chip px-3 py-1 rounded-full">
-                  2024 — PRESENT · HYDERABAD
+                  JUL 2024 — PRESENT · HYDERABAD
                 </span>
                 <span className="text-2xl font-serif font-bold text-white">
-                  CGPA 8.83
+                  CGPA 8.83/10
                 </span>
               </div>
               <h3 className="text-2xl font-serif font-semibold text-white">
@@ -400,10 +403,10 @@ export default function HomePage() {
             <div className="glossy-glass-card p-8 rounded-3xl">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-mono font-bold text-teal-300 glossy-chip px-3 py-1 rounded-full">
-                  2021 — 2023 · NALGONDA
+                  JUN 2021 — MAY 2024 · NALGONDA
                 </span>
                 <span className="text-2xl font-serif font-bold text-white">
-                  CGPA 9.64
+                  CGPA 9.64/10
                 </span>
               </div>
               <h3 className="text-2xl font-serif font-semibold text-white">
@@ -502,6 +505,14 @@ export default function HomePage() {
       <ProjectDetailModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
+        onNoDeployment={(p) => setNoticeProject(p)}
+      />
+
+      {/* Deployment Notice Modal Alert */}
+      <DeploymentNoticeModal
+        project={noticeProject}
+        isOpen={!!noticeProject}
+        onClose={() => setNoticeProject(null)}
       />
     </div>
   );

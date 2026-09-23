@@ -8,11 +8,14 @@ import {
   Sparkles,
   Play,
   Terminal,
+  Globe,
+  Radio,
 } from 'lucide-react';
 
 export default function ProjectCard3D({
   project,
   onOpenDetails,
+  onNoDeployment,
   delay = 0,
 }) {
   const cardRef = useRef(null);
@@ -34,7 +37,7 @@ export default function ProjectCard3D({
   const glareX = useTransform(springX, [-0.5, 0.5], [0, 100]);
   const glareY = useTransform(springY, [-0.5, 0.5], [0, 100]);
 
-  const handlePointerEnter = (e) => {
+  const handlePointerEnter = () => {
     if (cardRef.current) {
       rectRef.current = cardRef.current.getBoundingClientRect();
     }
@@ -60,6 +63,17 @@ export default function ProjectCard3D({
     y.set(0);
   };
 
+  const handleLiveDemoClick = (e) => {
+    e.stopPropagation();
+    if (project.liveUrl) {
+      window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      if (onNoDeployment) {
+        onNoDeployment(project);
+      }
+    }
+  };
+
   return (
     <motion.article
       ref={cardRef}
@@ -76,7 +90,7 @@ export default function ProjectCard3D({
         transformStyle: 'preserve-3d',
         perspective: 1200,
       }}
-      className="glossy-glass-card relative overflow-hidden rounded-[28px] p-7 sm:p-8 min-h-[480px] flex flex-col justify-between group cursor-pointer transition-all duration-300 will-change-transform"
+      className="glossy-glass-card relative overflow-hidden rounded-[28px] p-7 sm:p-8 min-h-[490px] flex flex-col justify-between group cursor-pointer transition-all duration-300 will-change-transform"
     >
       {/* Dynamic Specular Light Glare Overlay */}
       <motion.div
@@ -95,7 +109,7 @@ export default function ProjectCard3D({
       {/* Top Header Row (Z-Depth: 25px) */}
       <motion.div
         style={{ transform: 'translateZ(25px)' }}
-        className="relative z-20 flex items-center justify-between gap-4"
+        className="relative z-20 flex items-center justify-between gap-3"
       >
         {/* Category Tag Chip */}
         <div className="flex items-center gap-2">
@@ -108,20 +122,37 @@ export default function ProjectCard3D({
           </span>
         </div>
 
-        {/* Glossy Electric Blue Button */}
-        <button
-          onClick={() => onOpenDetails && onOpenDetails(project)}
-          className="glossy-pill-blue px-4 py-1.5 rounded-full text-xs flex items-center gap-1.5 cursor-pointer"
-        >
-          <span>Architecture</span>
-          <ExternalLink size={12} />
-        </button>
+        {/* Live Demo or Architecture Button */}
+        <div className="flex items-center gap-2">
+          {/* Live Demo Button with Deployment Detection */}
+          <button
+            onClick={handleLiveDemoClick}
+            title={project.liveUrl ? 'Open Live Deployment' : 'No live deployment available (Click for info)'}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              project.liveUrl
+                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 shadow-[0_0_12px_rgba(16,185,129,0.3)]'
+                : 'glossy-chip text-slate-400 hover:text-amber-300 hover:border-amber-400/40'
+            }`}
+          >
+            <Radio size={12} className={project.liveUrl ? 'text-emerald-400 animate-pulse' : 'text-slate-500'} />
+            <span>{project.liveUrl ? 'Live Demo ↗' : 'Deployment Status'}</span>
+          </button>
+
+          {/* Architecture Details Trigger */}
+          <button
+            onClick={() => onOpenDetails && onOpenDetails(project)}
+            className="glossy-pill-blue px-3.5 py-1.5 rounded-full text-xs flex items-center gap-1 cursor-pointer"
+          >
+            <span>Details</span>
+            <ExternalLink size={11} />
+          </button>
+        </div>
       </motion.div>
 
       {/* Main Quote / Statement Title (Z-Depth: 35px) */}
       <motion.div
         style={{ transform: 'translateZ(35px)' }}
-        className="relative z-20 my-5"
+        className="relative z-20 my-4"
       >
         <h3 className="text-xl sm:text-2xl font-sans font-semibold text-white tracking-tight leading-snug group-hover:text-blue-200 transition-colors">
           “{project.description}”
@@ -129,7 +160,7 @@ export default function ProjectCard3D({
 
         {project.subtitle && (
           <p className="font-mono text-xs text-blue-400/90 mt-3 font-medium flex items-center gap-1.5">
-            <Terminal size={13} className="text-blue-400" />
+            <Terminal size={13} className="text-blue-400 shrink-0" />
             <span>{project.subtitle}</span>
           </p>
         )}
@@ -138,7 +169,7 @@ export default function ProjectCard3D({
       {/* Feature Action Chips Row */}
       <motion.div
         style={{ transform: 'translateZ(28px)' }}
-        className="relative z-20 flex flex-wrap items-center gap-2 mb-5 text-[11px] font-sans text-slate-300"
+        className="relative z-20 flex flex-wrap items-center gap-2 mb-4 text-[11px] font-sans text-slate-300"
       >
         <span className="glossy-chip px-3 py-1 rounded-full flex items-center gap-1">
           <Sparkles size={11} className="text-blue-400" />
@@ -191,23 +222,24 @@ export default function ProjectCard3D({
           )}
         </div>
 
-        {/* Right Circular Blue Action Button */}
+        {/* Right Action Icons: GitHub and Live/Play */}
         <div className="flex items-center gap-2 shrink-0">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               aria-label={`View ${project.title} on GitHub`}
-              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-slate-200 hover:text-white transition-all"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-slate-200 hover:text-white transition-all shadow-sm"
             >
               <Github size={14} />
             </a>
           )}
 
           <button
-            onClick={() => onOpenDetails && onOpenDetails(project)}
-            aria-label={`Explore ${project.title}`}
+            onClick={handleLiveDemoClick}
+            aria-label={project.liveUrl ? 'Launch Live App' : 'Check Deployment Status'}
             className="glossy-circle-btn w-8 h-8 rounded-full flex items-center justify-center text-white cursor-pointer shadow-md"
           >
             <Play size={12} className="ml-0.5 fill-white" />

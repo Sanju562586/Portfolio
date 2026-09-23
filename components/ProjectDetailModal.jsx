@@ -1,10 +1,22 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Github, ExternalLink, Cpu, CheckCircle2, Workflow, ArrowRight } from 'lucide-react';
+import {
+  X,
+  Github,
+  ExternalLink,
+  Cpu,
+  CheckCircle2,
+  Workflow,
+  Radio,
+  AlertCircle,
+  Terminal,
+} from 'lucide-react';
 
-export default function ProjectDetailModal({ project, onClose }) {
+export default function ProjectDetailModal({ project, onClose, onNoDeployment }) {
+  const [showLocalNotice, setShowLocalNotice] = useState(false);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
@@ -20,6 +32,15 @@ export default function ProjectDetailModal({ project, onClose }) {
   }, [project, onClose]);
 
   if (!project) return null;
+
+  const handleLiveDemoClick = () => {
+    if (project.liveUrl) {
+      window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      setShowLocalNotice(true);
+      if (onNoDeployment) onNoDeployment(project);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -59,6 +80,16 @@ export default function ProjectDetailModal({ project, onClose }) {
               <span className="text-xs font-mono text-slate-400 font-medium">
                 ARCHIVE REF #{project.id}
               </span>
+              {project.liveUrl ? (
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono font-bold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  LIVE DEPLOYED
+                </span>
+              ) : (
+                <span className="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10px] font-mono font-semibold">
+                  SOURCE / LOCAL BUILD
+                </span>
+              )}
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-serif text-white font-semibold tracking-tight">
@@ -76,6 +107,36 @@ export default function ProjectDetailModal({ project, onClose }) {
           <div className="mt-6 text-slate-300 text-sm sm:text-base leading-relaxed font-sans border-b border-white/10 pb-6">
             “{project.description}”
           </div>
+
+          {/* Inline No Deployment Notice Alert (If clicked) */}
+          <AnimatePresence>
+            {showLocalNotice && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs font-sans flex items-start justify-between gap-3"
+              >
+                <div className="flex items-start gap-2.5">
+                  <AlertCircle size={16} className="text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block font-bold text-amber-300">
+                      No Live Deployment Link Available
+                    </strong>
+                    <p className="mt-1 text-slate-300">
+                      This system requires dedicated local environment, GPU inference checkpoints, or distributed message queues. Please review the complete setup instructions and source code on GitHub.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowLocalNotice(false)}
+                  className="text-slate-400 hover:text-white p-1 cursor-pointer"
+                >
+                  <X size={14} />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Architecture Pipeline Flow */}
           {project.architecture && (
@@ -145,7 +206,7 @@ export default function ProjectDetailModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Footer CTAs */}
+          {/* Footer Action Buttons */}
           <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
             <button
               onClick={onClose}
@@ -154,17 +215,33 @@ export default function ProjectDetailModal({ project, onClose }) {
               Close Window
             </button>
 
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glossy-pill-blue px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold flex items-center gap-2 shadow-lg"
+            <div className="flex items-center gap-3">
+              {/* Live Demo Button */}
+              <button
+                onClick={handleLiveDemoClick}
+                className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                  project.liveUrl
+                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg'
+                    : 'border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300'
+                }`}
               >
-                <Github size={15} />
-                <span>View on GitHub ↗</span>
-              </a>
-            )}
+                <Radio size={13} className={project.liveUrl ? 'animate-pulse' : ''} />
+                <span>{project.liveUrl ? 'Launch Live App ↗' : 'Check Live Demo'}</span>
+              </button>
+
+              {/* GitHub Link */}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glossy-pill-blue px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold flex items-center gap-2 shadow-lg"
+                >
+                  <Github size={15} />
+                  <span>GitHub Repository ↗</span>
+                </a>
+              )}
+            </div>
           </div>
         </motion.div>
       </div>
