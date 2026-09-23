@@ -16,6 +16,8 @@ import {
 
 export default function ProjectDetailModal({ project, onClose, onNoDeployment }) {
   const [showLocalNotice, setShowLocalNotice] = useState(false);
+  const modalWrapperRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -37,6 +39,39 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
     };
   }, [project, onClose]);
 
+  // Two-Finger Trackpad and Mouse Wheel Direct Controller
+  useEffect(() => {
+    if (!project) return;
+    const modalEl = modalWrapperRef.current;
+    const scrollEl = scrollContainerRef.current;
+    if (!modalEl || !scrollEl) return;
+
+    const handleWheel = (e) => {
+      // 1. Stop propagation so Lenis on window never intercepts and prevents default
+      e.stopPropagation();
+
+      // 2. Directly scroll the viewport container with e.deltaY (instant 1:1 trackpad response)
+      scrollEl.scrollTop += e.deltaY;
+
+      // 3. Prevent outer page/body bounce
+      if (e.cancelable) {
+        e.preventDefault();
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      e.stopPropagation();
+    };
+
+    modalEl.addEventListener('wheel', handleWheel, { passive: false });
+    modalEl.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    return () => {
+      modalEl.removeEventListener('wheel', handleWheel);
+      modalEl.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [project]);
+
   if (!project) return null;
 
   const handleLiveDemoClick = () => {
@@ -51,6 +86,7 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
   return (
     <AnimatePresence>
       <div
+        ref={modalWrapperRef}
         data-lenis-prevent
         className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden"
       >
@@ -63,24 +99,30 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
           className="fixed inset-0 bg-black/80 backdrop-blur-2xl"
         />
 
-        {/* Modal Window (Glossy Glass with Native Smooth Scroll) */}
+        {/* Modal Window (Glossy Glass Card Frame) */}
         <motion.div
-          data-lenis-prevent
-          tabIndex={0}
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="glossy-glass-card modal-custom-scroll relative z-10 w-full max-w-3xl max-h-[88vh] overflow-y-auto overscroll-contain rounded-[32px] p-6 sm:p-10 my-auto text-white shadow-2xl focus:outline-none"
+          className="glossy-glass-card relative z-10 w-full max-w-3xl max-h-[88vh] flex flex-col rounded-[32px] my-auto text-white shadow-2xl overflow-hidden"
         >
-          {/* Close Button */}
-          <button
-            onClick={onClose}
-            aria-label="Close Project Details"
-            className="absolute top-6 right-6 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer border border-white/15"
+          {/* Inner Dedicated Scrollable Viewport (Zero Transforms, Native & Trackpad Scrolling) */}
+          <div
+            ref={scrollContainerRef}
+            data-lenis-prevent
+            tabIndex={0}
+            className="modal-custom-scroll overflow-y-auto overscroll-contain p-6 sm:p-10 flex-1 focus:outline-none"
+            style={{ touchAction: 'pan-y', WebkitOverflowScrolling: 'touch' }}
           >
-            <X size={18} />
-          </button>
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              aria-label="Close Project Details"
+              className="absolute top-6 right-6 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer border border-white/15 z-20"
+            >
+              <X size={18} />
+            </button>
 
           {/* Header */}
           <div className="pr-12">
@@ -253,6 +295,8 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
                 </a>
               )}
             </div>
+          </div>
+          {/* End of scrollContainerRef */}
           </div>
         </motion.div>
       </div>
