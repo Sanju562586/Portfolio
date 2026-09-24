@@ -88,7 +88,7 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
       <div
         ref={modalWrapperRef}
         data-lenis-prevent
-        className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 xs:p-4 sm:p-6 overflow-hidden"
       >
         {/* Backdrop */}
         <motion.div
@@ -105,59 +105,59 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="glossy-glass-card relative z-10 w-full max-w-3xl max-h-[88vh] flex flex-col rounded-[32px] my-auto text-white shadow-2xl overflow-hidden"
+          className="glossy-glass-card relative z-10 w-full max-w-3xl max-h-[92vh] sm:max-h-[88vh] flex flex-col rounded-[24px] sm:rounded-[32px] my-auto text-white shadow-2xl overflow-hidden"
         >
           {/* Inner Dedicated Scrollable Viewport (Zero Transforms, Native & Trackpad Scrolling) */}
           <div
             ref={scrollContainerRef}
             data-lenis-prevent
             tabIndex={0}
-            className="modal-custom-scroll overflow-y-auto overscroll-contain p-6 sm:p-10 flex-1 focus:outline-none"
+            className="modal-custom-scroll overflow-y-auto overscroll-contain p-4 xs:p-6 sm:p-10 flex-1 focus:outline-none"
             style={{ touchAction: 'pan-y', WebkitOverflowScrolling: 'touch' }}
           >
             {/* Close Button */}
             <button
               onClick={onClose}
               aria-label="Close Project Details"
-              className="absolute top-6 right-6 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer border border-white/15 z-20"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 sm:p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer border border-white/15 z-20"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
 
           {/* Header */}
-          <div className="pr-12">
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="glossy-chip px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider text-blue-300">
+          <div className="pr-10 sm:pr-12">
+            <div className="flex flex-wrap items-center gap-2 mb-2.5 sm:mb-3">
+              <span className="glossy-chip px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-blue-300">
                 {project.category}
               </span>
-              <span className="text-xs font-mono text-slate-400 font-medium">
+              <span className="text-[11px] sm:text-xs font-mono text-slate-400 font-medium">
                 ARCHIVE REF #{project.id}
               </span>
               {project.liveUrl ? (
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-mono font-bold flex items-center gap-1.5">
+                <span className="px-2 sm:px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] sm:text-[10px] font-mono font-bold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   LIVE DEPLOYED
                 </span>
               ) : (
-                <span className="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[10px] font-mono font-semibold">
+                <span className="px-2 sm:px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[9px] sm:text-[10px] font-mono font-semibold">
                   SOURCE / LOCAL BUILD
                 </span>
               )}
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-serif text-white font-semibold tracking-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-serif text-white font-semibold tracking-tight leading-snug">
               {project.title}
             </h2>
 
             {project.subtitle && (
-              <p className="text-sm font-mono text-blue-400 mt-1.5 font-medium">
+              <p className="text-xs sm:text-sm font-mono text-blue-400 mt-1.5 font-medium">
                 {project.subtitle}
               </p>
             )}
           </div>
 
           {/* Description */}
-          <div className="mt-6 text-slate-300 text-sm sm:text-base leading-relaxed font-sans border-b border-white/10 pb-6">
+          <div className="mt-5 sm:mt-6 text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed font-sans border-b border-white/10 pb-5 sm:pb-6">
             “{project.description}”
           </div>
 
@@ -168,7 +168,7 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs font-sans flex items-start justify-between gap-3"
+                className="mt-5 sm:mt-6 p-3.5 sm:p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs font-sans flex items-start justify-between gap-3"
               >
                 <div className="flex items-start gap-2.5">
                   <AlertCircle size={16} className="text-amber-400 shrink-0 mt-0.5" />
@@ -176,14 +176,14 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
                     <strong className="block font-bold text-amber-300">
                       No Live Deployment Link Available
                     </strong>
-                    <p className="mt-1 text-slate-300">
+                    <p className="mt-1 text-slate-300 leading-relaxed">
                       This system requires dedicated local environment, GPU inference checkpoints, or distributed message queues. Please review the complete setup instructions and source code on GitHub.
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowLocalNotice(false)}
-                  className="text-slate-400 hover:text-white p-1 cursor-pointer"
+                  className="text-slate-400 hover:text-white p-1 cursor-pointer shrink-0"
                 >
                   <X size={14} />
                 </button>
@@ -193,12 +193,12 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
 
           {/* Architecture Pipeline Flow */}
           {project.architecture && (
-            <div className="mt-6 p-5 rounded-2xl bg-white/5 border border-white/10">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-blue-300 uppercase tracking-widest mb-3">
-                <Workflow size={15} className="text-blue-400" />
+            <div className="mt-5 sm:mt-6 p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-blue-300 uppercase tracking-widest mb-2.5 sm:mb-3">
+                <Workflow size={14} className="text-blue-400" />
                 <span>System Architecture & Pipeline Flow</span>
               </div>
-              <p className="font-mono text-xs sm:text-sm text-slate-200 bg-black/40 p-4 rounded-xl border border-white/10 shadow-inner leading-relaxed">
+              <p className="font-mono text-xs sm:text-sm text-slate-200 bg-black/40 p-3 sm:p-4 rounded-xl border border-white/10 shadow-inner leading-relaxed overflow-x-auto">
                 {project.architecture}
               </p>
             </div>
@@ -206,15 +206,15 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
 
           {/* Key Metrics */}
           {project.metrics && (
-            <div className="mt-6">
-              <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block mb-2.5">
+            <div className="mt-5 sm:mt-6">
+              <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block mb-2 sm:mb-2.5">
                 Performance & Specifications
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 {project.metrics.map((metric, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-2xl bg-white/5 border border-white/10 text-center font-mono"
+                    className="p-3 sm:p-3.5 rounded-2xl bg-white/5 border border-white/10 text-center font-mono"
                   >
                     <span className="text-xs sm:text-sm font-bold text-blue-300">
                       ✦ {metric}
@@ -227,14 +227,14 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
 
           {/* Technical Highlights */}
           {project.highlights && (
-            <div className="mt-6">
-              <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block mb-3">
+            <div className="mt-5 sm:mt-6">
+              <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block mb-2.5 sm:mb-3">
                 Technical Highlights & Innovations
               </span>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5 sm:space-y-3">
                 {project.highlights.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-300 leading-relaxed font-sans">
-                    <CheckCircle2 size={16} className="text-blue-400 shrink-0 mt-0.5" />
+                  <li key={idx} className="flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+                    <CheckCircle2 size={15} className="text-blue-400 shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -243,15 +243,15 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
           )}
 
           {/* Tech Stack */}
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block mb-3">
+          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10">
+            <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block mb-2.5 sm:mb-3">
               Technologies & Frameworks
             </span>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {project.stack.map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono font-medium text-slate-200"
+                  className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-white/5 border border-white/10 text-[11px] sm:text-xs font-mono font-medium text-slate-200"
                 >
                   {tech}
                 </span>
@@ -260,19 +260,19 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
           </div>
 
           {/* Footer Action Buttons */}
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
             <button
               onClick={onClose}
-              className="px-5 py-2.5 rounded-full border border-white/15 font-mono text-xs uppercase tracking-wider font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="px-5 py-2.5 rounded-full border border-white/15 font-mono text-xs uppercase tracking-wider font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer text-center"
             >
               Close Window
             </button>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-3">
               {/* Live Demo Button */}
               <button
                 onClick={handleLiveDemoClick}
-                className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                className={`px-4 sm:px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   project.liveUrl
                     ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg'
                     : 'border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300'
@@ -288,7 +288,7 @@ export default function ProjectDetailModal({ project, onClose, onNoDeployment })
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glossy-pill-blue px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold flex items-center gap-2 shadow-lg"
+                  className="glossy-pill-blue px-5 sm:px-6 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 shadow-lg text-center"
                 >
                   <Github size={15} />
                   <span>GitHub Repository ↗</span>

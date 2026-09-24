@@ -21,13 +21,19 @@ export const metadata = {
     'Glassmorphism',
   ],
   authors: [{ name: 'Sanjay Kumar' }],
-  viewport: 'width=device-width, initial-scale=1',
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#07090e',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-[#07090e] text-[#f8fafc] font-sans antialiased selection:bg-blue-600 selection:text-white">
+      <body className="bg-[#07090e] text-[#f8fafc] font-sans antialiased selection:bg-blue-600 selection:text-white max-w-[100vw] overflow-x-hidden">
         <SmoothScroll>
           {/* Dynamic 3D Spatial Spring Cursor */}
           <Interactive3DCursor />
@@ -36,7 +42,7 @@ export default function RootLayout({ children }) {
           <Navbar />
 
           {/* Main Routed Page Content */}
-          <div className="pt-20">
+          <div className="pt-20 sm:pt-24 w-full">
             {children}
           </div>
 

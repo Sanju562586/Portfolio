@@ -43,12 +43,12 @@ export default function StatCard3D({ index, number, title, description, delay = 
         transformStyle: 'preserve-3d',
         perspective: 1000,
       }}
-      className="glossy-glass-card relative min-h-[250px] p-8 rounded-3xl border overflow-hidden transition-all duration-300 group cursor-pointer"
+      className="glossy-glass-card relative min-h-[210px] sm:min-h-[250px] p-5 sm:p-8 rounded-[24px] sm:rounded-3xl border overflow-hidden transition-all duration-300 group cursor-pointer"
     >
       {/* Top Index Tag */}
       <span
         style={{ transform: 'translateZ(20px)' }}
-        className="text-blue-400 font-mono text-[11px] font-bold tracking-widest block uppercase"
+        className="text-blue-400 font-mono text-[10px] sm:text-[11px] font-bold tracking-widest block uppercase"
       >
         {index}
       </span>
@@ -56,7 +56,7 @@ export default function StatCard3D({ index, number, title, description, delay = 
       {/* Primary Number */}
       <strong
         style={{ transform: 'translateZ(45px)' }}
-        className="block mt-6 font-serif text-5xl sm:text-6xl text-white tracking-tight leading-none group-hover:text-blue-300 transition-colors duration-300 font-semibold"
+        className="block mt-4 sm:mt-6 font-serif text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-none group-hover:text-blue-300 transition-colors duration-300 font-semibold"
       >
         {number}
       </strong>
@@ -64,7 +64,7 @@ export default function StatCard3D({ index, number, title, description, delay = 
       {/* Description */}
       <p
         style={{ transform: 'translateZ(25px)' }}
-        className="mt-4 text-xs font-sans text-slate-300 leading-relaxed font-normal max-w-[240px]"
+        className="mt-3 sm:mt-4 text-xs font-sans text-slate-300 leading-relaxed font-normal max-w-full sm:max-w-[240px]"
       >
         {description}
       </p>

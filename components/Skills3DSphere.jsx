@@ -69,17 +69,38 @@ export default function Skills3DSphere() {
     };
   }, []);
 
-  const radius = 185;
+  const [radius, setRadius] = useState(185);
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (typeof window === 'undefined') return;
+      const w = window.innerWidth;
+      if (w < 480) {
+        setRadius(105);
+      } else if (w < 768) {
+        setRadius(135);
+      } else if (w < 1024) {
+        setRadius(160);
+      } else {
+        setRadius(185);
+      }
+    };
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions, { passive: true });
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
   const count = SKILLS_DATA.length;
 
   return (
-    <div ref={containerRef} className="relative w-full py-8 flex flex-col items-center select-none will-change-transform">
+    <div ref={containerRef} className="relative w-full py-4 sm:py-8 flex flex-col items-center select-none will-change-transform">
       {/* 3D Sphere Interactive Canvas Box */}
-      <div className="glossy-glass-card relative w-full max-w-4xl h-[470px] flex items-center justify-center overflow-hidden rounded-[32px] p-6">
+      <div className="glossy-glass-card relative w-full max-w-4xl h-[370px] xs:h-[410px] sm:h-[470px] flex items-center justify-center overflow-hidden rounded-[24px] sm:rounded-[32px] p-3 sm:p-6">
         {/* Floating Instruction Badge */}
-        <div className="absolute top-5 left-5 z-20 flex items-center gap-2 font-mono text-[11px] text-slate-300 glossy-chip px-3.5 py-1.5 rounded-full">
+        <div className="absolute top-3.5 sm:top-5 left-3.5 sm:left-5 z-20 flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-[11px] text-slate-300 glossy-chip px-3 sm:px-3.5 py-1.5 rounded-full">
           <Move size={12} className="text-blue-400" />
-          <span>DRAG TO ROTATE 3D CELESTIAL CLOUD</span>
+          <span className="hidden sm:inline">DRAG TO ROTATE 3D CELESTIAL CLOUD</span>
+          <span className="sm:hidden">DRAG TO ROTATE 3D SPHERE</span>
         </div>
 
         {/* 3D Transform Space */}
@@ -128,15 +149,15 @@ export default function Skills3DSphere() {
                   opacity,
                   zIndex,
                 }}
-                className={`cursor-grab active:cursor-grabbing px-4 py-2.5 rounded-2xl border ${skill.color} bg-slate-950/85 backdrop-blur-md text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_8px_20px_rgba(0,0,0,0.5)] transition-shadow hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]`}
+                className={`cursor-grab active:cursor-grabbing px-2.5 sm:px-4 py-1.5 sm:py-2.5 rounded-xl sm:rounded-2xl border ${skill.color} bg-slate-950/85 backdrop-blur-md text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_8px_20px_rgba(0,0,0,0.5)] transition-shadow hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]`}
               >
-                <span className="block font-mono text-[9px] font-bold uppercase tracking-widest text-slate-400">
+                <span className="block font-mono text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-slate-400">
                   {skill.category}
                 </span>
-                <span className="block font-serif text-lg text-white font-semibold my-0.5">
+                <span className="block font-serif text-sm sm:text-lg text-white font-semibold my-0.5 leading-tight">
                   {skill.name}
                 </span>
-                <span className="block font-mono text-[10px] font-bold text-blue-400">
+                <span className="block font-mono text-[9px] sm:text-[10px] font-bold text-blue-400">
                   {skill.level}
                 </span>
               </motion.div>

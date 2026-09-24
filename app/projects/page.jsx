@@ -37,34 +37,34 @@ export default function ProjectsArchivePage() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-8 w-[min(1280px,92%)] mx-auto">
+    <div className="min-h-screen py-8 sm:py-10 px-2 sm:px-6 w-[min(1280px,94%)] mx-auto">
       {/* Back Button */}
       <Link
         href="/"
-        className="glossy-chip inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full text-slate-200 font-mono text-xs font-semibold hover:text-white shadow-sm transition-all group cursor-pointer"
+        className="glossy-chip inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 mb-6 sm:mb-8 rounded-full text-slate-200 font-mono text-xs font-semibold hover:text-white shadow-sm transition-all group cursor-pointer"
       >
         <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1 text-blue-400" />
         <span>Back to Home</span>
       </Link>
 
       {/* Page Header */}
-      <div className="mb-14">
-        <p className="text-blue-400 font-mono text-xs tracking-widest uppercase mb-3 font-bold flex items-center gap-2">
+      <div className="mb-8 sm:mb-14">
+        <p className="text-blue-400 font-mono text-xs tracking-widest uppercase mb-2.5 sm:mb-3 font-bold flex items-center gap-2">
           <Sparkles size={14} /> Full Engineering Projects Archive
         </p>
-        <h1 className="text-5xl sm:text-7xl font-serif text-white tracking-tight leading-none">
+        <h1 className="text-3xl xs:text-5xl sm:text-7xl font-serif text-white tracking-tight leading-none">
           All <em className="italic text-blue-400 font-serif">Engineering</em> Projects
         </h1>
-        <p className="text-slate-300 text-base sm:text-lg mt-4 max-w-2xl font-sans leading-relaxed">
+        <p className="text-slate-300 text-sm sm:text-lg mt-3 sm:mt-4 max-w-2xl font-sans leading-relaxed">
           Explore complete systems across <strong>Agentic AI</strong>, <strong>Multimodal VLMs</strong>, <strong>Machine Learning</strong>, and <strong>High-Throughput Web Platforms</strong>.
         </p>
       </div>
 
       {/* Control Bar: Categories & Search */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12 pb-8 border-b border-white/10">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6 mb-8 sm:mb-12 pb-6 sm:pb-8 border-b border-white/10">
         {/* Category Classification Tabs */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-slate-400 font-mono text-[10px] uppercase font-bold tracking-widest mr-2 flex items-center gap-1">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+          <span className="text-slate-400 font-mono text-[10px] uppercase font-bold tracking-widest mr-1.5 sm:mr-2 flex items-center gap-1">
             <Filter size={12} /> CATEGORY:
           </span>
           {categories.map((cat) => {
@@ -77,7 +77,7 @@ export default function ProjectsArchivePage() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
                   selectedCategory === cat
                     ? 'glossy-pill-blue'
                     : 'glossy-chip'
@@ -85,7 +85,7 @@ export default function ProjectsArchivePage() {
               >
                 <span>{cat}</span>
                 <span
-                  className={`px-2 py-0.5 rounded-full text-[10px] ${
+                  className={`px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] ${
                     selectedCategory === cat
                       ? 'bg-white/20 text-white'
                       : 'bg-white/10 text-slate-300'
@@ -109,7 +109,7 @@ export default function ProjectsArchivePage() {
             placeholder="Search by tech, title, or system keyword..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-10 py-3 rounded-2xl glossy-inner-bar font-mono text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-400 transition-all shadow-md"
+            className="w-full pl-11 pr-10 py-2.5 sm:py-3 rounded-2xl glossy-inner-bar font-mono text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-blue-400 transition-all shadow-md"
           />
           {searchQuery && (
             <button
@@ -124,7 +124,7 @@ export default function ProjectsArchivePage() {
 
       {/* Projects Grid */}
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
               <ProjectCard3D

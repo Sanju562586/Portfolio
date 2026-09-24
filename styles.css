@@ -25,15 +25,22 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  max-width: 100vw;
+  width: 100%;
   overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Light Colorful Ambient Glow Backdrops */

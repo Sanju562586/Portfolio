@@ -201,15 +201,16 @@ export default function Hero3DVisualizer() {
         transformStyle: 'preserve-3d',
         perspective: 1200,
       }}
-      className="glossy-glass-card relative w-full h-[440px] sm:h-[480px] flex items-center justify-center rounded-[32px] overflow-hidden group select-none transition-shadow duration-500 will-change-transform"
+      className="glossy-glass-card relative w-full h-[320px] xs:h-[380px] sm:h-[440px] lg:h-[480px] flex items-center justify-center rounded-[24px] sm:rounded-[32px] overflow-hidden group select-none transition-shadow duration-500 will-change-transform"
     >
       {/* Top Floating Telemetry Chips */}
-      <div className="absolute top-5 left-5 right-5 z-20 flex items-center justify-between pointer-events-none">
-        <span className="glossy-chip px-3.5 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase font-bold text-blue-300 flex items-center gap-2">
+      <div className="absolute top-3.5 sm:top-5 left-3.5 sm:left-5 right-3.5 sm:right-5 z-20 flex items-center justify-between gap-2 pointer-events-none">
+        <span className="glossy-chip px-2.5 sm:px-3.5 py-1 rounded-full text-[9px] sm:text-[10px] font-mono tracking-wider sm:tracking-widest uppercase font-bold text-blue-300 flex items-center gap-1.5 sm:gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_#3b82f6] animate-pulse" />
-          NEURAL MATRIX · 3D TOPOLOGY
+          <span className="hidden xs:inline">NEURAL MATRIX · 3D TOPOLOGY</span>
+          <span className="xs:hidden">NEURAL MATRIX</span>
         </span>
-        <span className="glossy-chip px-3 py-1 rounded-full text-[10px] font-mono text-slate-400">
+        <span className="glossy-chip px-2.5 sm:px-3 py-1 rounded-full text-[9px] sm:text-[10px] font-mono text-slate-400 hidden xs:inline-block">
           FIBONACCI LATTICE
         </span>
       </div>
@@ -218,11 +219,11 @@ export default function Hero3DVisualizer() {
       <canvas ref={canvasRef} className="w-full h-full relative z-10 cursor-grab active:cursor-grabbing" />
 
       {/* Bottom Floating Telemetry */}
-      <div className="absolute bottom-5 left-5 right-5 z-20 flex items-center justify-between pointer-events-none font-mono text-[10px] text-slate-400">
-        <span className="glossy-chip px-3 py-1 rounded-full">
+      <div className="absolute bottom-3.5 sm:bottom-5 left-3.5 sm:left-5 right-3.5 sm:right-5 z-20 flex items-center justify-between gap-2 pointer-events-none font-mono text-[9px] sm:text-[10px] text-slate-400">
+        <span className="glossy-chip px-2.5 sm:px-3 py-1 rounded-full hidden xs:inline-block">
           HARDWARE ACCELERATED
         </span>
-        <span className="glossy-chip px-3 py-1 rounded-full text-teal-400 font-semibold">
+        <span className="glossy-chip px-2.5 sm:px-3 py-1 rounded-full text-teal-400 font-semibold">
           ACTIVE NODES: {activeNodes}
         </span>
       </div>
