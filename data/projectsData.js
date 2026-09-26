@@ -1,7 +1,49 @@
 export const PROJECTS_DATA = [
-  // --- 01: VISION-LANGUAGE MODEL FOR DOCUMENT Q&A ---
+  // --- 01: DOCMIND — NEURAL DOCUMENT INTELLIGENCE & HYBRID RAG ---
   {
     id: '01',
+    tag: 'NEURAL RAG & DOCUMENT AI',
+    category: 'AI',
+    title: 'DocMind',
+    subtitle: 'Hierarchical Ingestion, Hybrid RRF Neural Reranking & Resilient Multi-LLM Router',
+    description:
+      'A production-grade, document-grounded intelligence platform featuring hierarchical parent-child chunking, hybrid BM25 + dense bi-encoder retrieval with cross-encoder reranking, zero-downtime multi-LLM failover, and global cross-session neural memory.',
+    stack: [
+      'Python 3.11+',
+      'FastAPI',
+      'Next.js 16',
+      'React 19',
+      'PyTorch',
+      'Sentence Transformers',
+      'BM25Okapi',
+      'Cross-Encoder',
+      'Google Gemini',
+      'Groq (LLaMA 3.3 70B)',
+      'OpenRouter',
+      'PostgreSQL / SQLite (WAL)',
+      'Docker',
+      'TypeScript',
+      'Tailwind CSS',
+      'SSE Streaming',
+    ],
+    githubUrl: 'https://github.com/Sanju562586/DocMind',
+    liveUrl: 'https://doc-mind-pi-umber.vercel.app/',
+    demoType: 'neural-rag',
+    architecture:
+      'Multi-Format Ingestion (PDF, DOCX, XLSX) ➔ Dual-Layer Parent-Child Chunking (512t/128t) ➔ Hybrid Retrieval (BM25Okapi + all-MiniLM-L6-v2 RRF) ➔ Cross-Encoder Reranking (ms-marco-MiniLM) ➔ Resilient Multi-LLM Router (Gemini → Groq → OpenRouter) ➔ Real-Time SSE Token Streaming & Cross-Session Neural Memory',
+    metrics: ['Dual-Layer 512t/128t Chunks', 'Zero-Downtime Failover', 'Real-Time SSE Streaming'],
+    highlights: [
+      'Hierarchical Ingestion & Chunking: Parses multi-format files (PDF, DOCX, XLSX) via semantic boundary detection and dual-layer parent-child chunking (512t/128t) with contextual prefix injection.',
+      'Hybrid Retrieval & Neural Reranking: Combines BM25Okapi lexical search and dense bi-encoder embeddings via RRF, refined by cross-encoder reranking and parent context expansion.',
+      'Resilient Multi-LLM Router & Memory: Implements cascading zero-downtime failover across Gemini, Groq, and OpenRouter, backed by cross-session neural vector memory for long-term recall.',
+      'Full-Stack Streaming & Persistence: High-throughput FastAPI backend with real-time SSE token streaming and PostgreSQL/SQLite WAL persistence, paired with a Next.js 16 / React 19 glassmorphic UI.'
+    ],
+    cardStyle: 'card-1',
+  },
+
+  // --- 02: VISION-LANGUAGE MODEL FOR DOCUMENT Q&A ---
+  {
+    id: '02',
     tag: 'DEEP LEARNING & VLM',
     category: 'Deep Learning',
     title: 'Vision-Language model for document Q&A',
@@ -28,12 +70,12 @@ export const PROJECTS_DATA = [
       'Built a multimodal inference pipeline with cross-modal projection and chat-format instruction templates; evaluated on ANLS score and hallucination rate across unseen document types.',
       'Stress-tested on adversarial inputs (blur, rotation, compression artifacts) and documented failure modes with ablation across projector configurations.'
     ],
-    cardStyle: 'card-1',
+    cardStyle: 'card-2',
   },
 
-  // --- 02: IDENTITY DOCUMENT INTELLIGENCE SYSTEM ---
+  // --- 03: IDENTITY DOCUMENT INTELLIGENCE SYSTEM ---
   {
-    id: '02',
+    id: '03',
     tag: 'DEEP LEARNING & VLM',
     category: 'Deep Learning',
     title: 'Identity Document Intelligence System',
@@ -64,12 +106,12 @@ export const PROJECTS_DATA = [
       'Built a dual-stream forgery detection head fusing VLM vision encoder features with ELA noise maps, evaluated on AUROC and ECE with Grad-CAM tamper localization.',
       'Applied DPO preference alignment atop the SFT checkpoint to penalize overconfident predictions; benchmarked Base → SFT → SFT+DPO across 24 adversarial test conditions on W&B.'
     ],
-    cardStyle: 'card-2',
+    cardStyle: 'card-3',
   },
 
-  // --- 03: AGENTIC NATURAL LANGUAGE DATA ANALYSIS ASSISTANT ---
+  // --- 04: AGENTIC NATURAL LANGUAGE DATA ANALYSIS ASSISTANT ---
   {
-    id: '03',
+    id: '04',
     tag: 'AGENTIC DATA AI',
     category: 'AI',
     title: 'Agentic Natural Language Data Analysis Assistant',
@@ -88,12 +130,12 @@ export const PROJECTS_DATA = [
       'Tool capabilities include statistical summarisation, conditional row filtering, group-level aggregation, sandboxed Pandas code execution, and dynamic chart generation.',
       'Deployed as a live Streamlit web application on Streamlit Cloud with API secrets management.'
     ],
-    cardStyle: 'card-3',
+    cardStyle: 'card-4',
   },
 
-  // --- 04: SENTINELLM — AI PROMPT INJECTION & SECURITY GATEWAY ---
+  // --- 05: SENTINELLM — AI PROMPT INJECTION & SECURITY GATEWAY ---
   {
-    id: '04',
+    id: '05',
     tag: 'AI SECURITY & LLM FIREWALL',
     category: 'AI',
     title: 'SentinelLLM — AI Prompt Injection & Security Gateway',
@@ -122,12 +164,12 @@ export const PROJECTS_DATA = [
       'Implemented a dual-stage security pipeline combining fast heuristic rule-based detection with DeBERTa-based deep classification, including dedicated RAG poisoning and tool-output injection detection.',
       'Developed a 50+ case red-team adversarial benchmark, PostgreSQL audit trail system, Streamlit security dashboard, and Dockerized FastAPI gateway enabling continuous regression testing.'
     ],
-    cardStyle: 'card-4',
+    cardStyle: 'card-1',
   },
 
-  // --- 05: INTELLIGENT FRAUD DETECTION AND RISK SCORING SYSTEM ---
+  // --- 06: INTELLIGENT FRAUD DETECTION AND RISK SCORING SYSTEM ---
   {
-    id: '05',
+    id: '06',
     tag: 'DISTRIBUTED ML & STREAMING',
     category: 'Machine Learning',
     title: 'Intelligent Fraud Detection and Risk Scoring System',
@@ -148,12 +190,12 @@ export const PROJECTS_DATA = [
       'Developed a FastAPI backend exposing REST APIs for transaction monitoring, fraud predictions, worker health, and system metrics.',
       'Improved pipeline reliability and fault tolerance through Kafka offset checkpointing and independently operating worker architecture.'
     ],
-    cardStyle: 'card-1',
+    cardStyle: 'card-2',
   },
 
-  // --- 06: AI RESUME Q&A ASSISTANT ---
+  // --- 07: AI RESUME Q&A ASSISTANT ---
   {
-    id: '06',
+    id: '07',
     tag: 'RETRIEVAL AUGMENTATION',
     category: 'AI',
     title: 'AI Resume Q&A Assistant',
@@ -171,12 +213,12 @@ export const PROJECTS_DATA = [
       'Integrated LLMs to answer natural-language queries against resume content, enabling context-aware responses, skill extraction, and automated interview question generation.',
       'Designed a modular pipeline architecture allowing the embedding model or LLM backend to be swapped with zero downstream changes.'
     ],
-    cardStyle: 'card-2',
+    cardStyle: 'card-3',
   },
 
-  // --- 07: GOOGLE AI PERSONAL ASSISTANT ---
+  // --- 08: GOOGLE AI PERSONAL ASSISTANT ---
   {
-    id: '07',
+    id: '08',
     tag: 'GOOGLE MCP & AGENTIC AI',
     category: 'AI',
     title: 'Google AI Personal Assistant',
@@ -195,12 +237,12 @@ export const PROJECTS_DATA = [
       'Live Google Integration: Full read/write access to Google services via OAuth 2.0; send emails, create calendar events, search Drive files in real time.',
       'Multi-turn Conversation: Maintains rolling chat history (up to 20 turns), auto-injects current IST time for scheduling, and handles malformed tool calls with regex fallback parsing.'
     ],
-    cardStyle: 'card-3',
+    cardStyle: 'card-4',
   },
 
-  // --- 08: CAMPUS FOOD REDISTRIBUTION NETWORK ---
+  // --- 09: CAMPUS FOOD REDISTRIBUTION NETWORK ---
   {
-    id: '08',
+    id: '09',
     tag: 'FULL-STACK WEB & REALTIME',
     category: 'Web Development',
     title: 'Campus Food Redistribution Network',
@@ -219,6 +261,6 @@ export const PROJECTS_DATA = [
       'Built event-driven real-time communication layer using WebSockets (Socket.io) enabling instant food availability broadcasts to all connected clients.',
       'Integrated Google Gemini AI for personalized dietary recommendations; implemented OTP authentication and QR-code pickup verification for secure end-to-end flows.'
     ],
-    cardStyle: 'card-4',
+    cardStyle: 'card-1',
   },
 ];

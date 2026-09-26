@@ -156,6 +156,8 @@ export default function HomePage() {
           >
             {[...Array(2)].map((_, i) => (
               <span key={i} className="flex items-center gap-8">
+                <span className="text-slate-200">Hierarchical RAG & Neural Reranking</span>
+                <b className="text-teal-400">✦</b>
                 <span className="text-slate-200">Model Context Protocol (MCP)</span>
                 <b className="text-blue-400">✦</b>
                 <span className="text-slate-200">Agentic Reasoning Loops</span>

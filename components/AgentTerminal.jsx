@@ -140,6 +140,52 @@ const SCENARIOS = [
     ],
     finalNote: 'Document verified authentic with zero digital splicing or localized tampering detected.',
   },
+  {
+    title: 'DocMind — Neural Document Intelligence',
+    category: 'Hierarchical RAG & Multi-LLM Router',
+    query: 'Ingest enterprise Q3 financial report (PDF/XLSX), perform hybrid lexical-dense retrieval, and stream executive synthesis.',
+    chips: ['Parent-Child 512t/128t', 'BM25 + all-MiniLM', 'RRF + ms-marco Rerank', 'Gemini ➔ Groq Failover'],
+    metrics: { time: '194ms', tools: 'Hybrid RRF + Reranker', model: 'Gemini 2.0 Flash', status: 'SSE Stream Active' },
+    steps: [
+      {
+        icon: FileSpreadsheet,
+        action: 'Hierarchical Chunking & Boundary Ingestion',
+        service: 'FastAPI Parser',
+        summary: 'Detected semantic table/text boundaries in Q3_Report.pdf; generated 512t parent chunks with 128t child spans.',
+        latency: '45ms',
+        status: 'Indexed',
+        payload: { file_type: 'PDF/XLSX', parent_chunks: 48, child_spans: 192 },
+      },
+      {
+        icon: Search,
+        action: 'Hybrid RRF Search & Cross-Encoder Rerank',
+        service: 'BM25 + SentenceTransformers',
+        summary: 'Merged lexical BM25Okapi and dense bi-encoder results via Reciprocal Rank Fusion; refined top-5 via ms-marco-MiniLM-L-6-v2.',
+        latency: '68ms',
+        status: 'Reranked',
+        payload: { lexical_matches: 24, dense_matches: 20, rrf_top_k: 5 },
+      },
+      {
+        icon: Layers,
+        action: 'Multi-LLM Routing & Context Expansion',
+        service: 'Resilient LLM Router',
+        summary: 'Hydrated child matches with parent context; dispatched prompt through cascading Gemini 2.0 Flash with zero-downtime failover.',
+        latency: '81ms',
+        status: 'Connected',
+        payload: { provider: 'Google Gemini (Primary)', fallback: 'Groq LLaMA 3.3', failover_ready: true },
+      },
+      {
+        icon: Sparkles,
+        action: 'Real-Time SSE Token Streaming',
+        service: 'FastAPI + Next.js 16 UI',
+        summary: 'Streaming grounded response tokens with strict document citations and cross-session neural memory recall.',
+        latency: '15ms/tok',
+        status: 'Streaming',
+        payload: { sse_active: true, citations_grounded: 4, stream_state: 'complete' },
+      },
+    ],
+    finalNote: 'Completed hybrid retrieval, cross-encoder reranking, and multi-LLM stream with zero hallucination.',
+  },
 ];
 
 export default function AgentTerminal() {
